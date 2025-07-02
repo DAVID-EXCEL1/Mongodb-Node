@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide: Node.js & MongoDB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Warm Neutrals with Dark Accents (inspired by femi-ts-note.vercel.app)
+        Application Structure Plan: The application now features a distinct, fixed sidebar for navigation on the left and a scrollable main content area on the right, mirroring the structure of the reference website. This design prioritizes content readability and quick access to different sections via the sidebar's smooth scroll-to-anchor functionality. This structure is highly effective for technical documentation, allowing users to easily browse topics or dive deep into specific sections. Key interactive elements like tabbed CRUD operations and expandable schema options are retained and styled to integrate seamlessly with the new aesthetic, enhancing usability and content exploration. A search bar is added to the sidebar for visual consistency, though its functionality is limited to UI resemblance in this iteration.
+        Visualization & Content Choices: The source material is a technical guide. Goal: Organize Content -> Viz: Fixed Sidebar Navigation (scroll-to-anchor) + Search Input -> Interaction: Click to scroll to content sections, visual search bar, and now, automatic highlighting of active section on scroll -> Justification: Provides persistent navigation and a familiar UI pattern for content discovery, enhancing user orientation within the long-form content. Goal: Explain CRUD -> Viz: Tabbed component -> Interaction: Click to switch between Create/Read/Update/Delete code -> Justification: Efficiently presents related code snippets without overwhelming the user. Goal: Detail Schema Options -> Viz: Interactive, collapsible list -> Interaction: Click to expand/collapse details -> Justification: Allows users to explore details on demand, keeping the main view clean. Goal: Make Code Usable -> Viz: "Copy" button on code blocks -> Interaction: Click to copy to clipboard -> Justification: Improves developer workflow by making code snippets easily transferable. No charts are used as the content is purely instructional and textual.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-block {
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Subtle white for dark background */
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s, background-color 0.2s;
+        }
+
+        .code-block:hover .copy-button {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Lighter background for active */
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Even lighter hover */
+        }
+
+        .crud-tab {
+            padding: 0.75rem 1rem;
+            border-bottom-width: 2px;
+            border-color: transparent;
+            font-weight: 500;
+            color: #6B7280;
+            /* gray-500 */
+            transition: all 0.2s;
+        }
+
+        .crud-tab:hover {
+            color: #1F2937;
+            /* gray-900 */
+            border-color: #E5E7EB;
+            /* gray-200 */
+        }
+
+        .crud-tab.active {
+            border-color: #1F2937;
+            /* gray-900 */
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .schema-option-title {
+            cursor: pointer;
+            padding: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #374151;
+            /* gray-700 */
+            transition: color 0.2s;
+        }
+
+        .schema-option-title:hover {
+            color: #1F2937;
+            /* gray-900 */
+        }
+
+        .schema-option-content {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .schema-option-content.active {
+            display: block;
+            max-height: 500px;
+            /* Adjust as needed */
+        }
+
+        .plus-minus-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            transform-origin: center;
+        }
+
+        .rotate-45 {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <nav
+            class="w-full md:w-64 bg-gray-900 text-gray-200 p-4 md:p-6 flex-shrink-0 sticky top-0 h-screen overflow-y-auto border-r border-gray-800">
+            <h1 class="text-2xl font-bold text-white mb-6">
+                <span class="text-blue-400">Mongo</span><span class="text-orange-400">Node</span> Guide
+            </h1>
+
+            <div class="mb-6">
+                <input type="text" placeholder="Search guide..."
+                    class="w-full p-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-blue-500 placeholder-gray-500">
+            </div>
+
+            <ul class="space-y-2">
+                <li><a href="#overview"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700 active"
+                        data-target="overview">
+                        <span class="mr-3 text-lg">&#128218;</span> Overview & Prerequisites
+                    </a></li>
+                <li><a href="#setup"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="setup">
+                        <span class="mr-3 text-lg">&#128187;</span> Initial Setup
+                    </a></li>
+                <li><a href="#connection"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="connection">
+                        <span class="mr-3 text-lg">&#128279;</span> Database Connection
+                    </a></li>
+                <li><a href="#schema"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="schema">
+                        <span class="mr-3 text-lg">&#128203;</span> Schema & Models
+                    </a></li>
+                <li><a href="#crud"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="crud">
+                        <span class="mr-3 text-lg">&#128196;</span> CRUD Operations
+                    </a></li>
+                <li><a href="#run"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="run">
+                        <span class="mr-3 text-lg">&#128640;</span> Run & Test
+                    </a></li>
+                <li><a href="#best-practices"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="best-practices">
+                        <span class="mr-3 text-lg">&#128200;</span> Best Practices
+                    </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10 space-y-12 bg-white">
+            <div id="overview" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Overview & Prerequisites</h2>
+                <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for connecting a
+                    MongoDB database to a Node.js application using Mongoose. Here, you'll find everything you need to
+                    get started, from initial setup to defining data structures and interacting with your database. This
+                    section outlines the tools you'll need to follow along.</p>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><b>Node.js and npm:</b> Required for running the application and managing packages. Download
+                            from <a href="https://nodejs.org/" target="_blank"
+                                class="text-blue-600 hover:underline">nodejs.org</a>.</li>
+                        <li><b>MongoDB:</b> Your database. You can run it locally or use a cloud service.
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><b>Local:</b> Install MongoDB Community Server from <a
+                                        href="https://www.mongodb.com/try/download/community" target="_blank"
+                                        class="text-blue-600 hover:underline">mongodb.com</a>.</li>
+                                <li><b>Cloud (Recommended):</b> Set up a free cluster on <a
+                                        href="https://www.mongodb.com/cloud/atlas" target="_blank"
+                                        class="text-blue-600 hover:underline">MongoDB Atlas</a>.</li>
+                            </ul>
+                        </li>
+                        <li><b>Text Editor:</b> A code editor like VS Code is recommended.</li>
+                        <li><b>API Testing Tool:</b> Optional but helpful for testing your endpoints (e.g., Postman,
+                            Insomnia).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="setup" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Initial Setup</h2>
+                <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your
+                    Node.js project, installing the necessary libraries, and configuring your environment to securely
+                    connect to your database. Follow these steps to build the foundation of your application.</p>
+
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Set up your Node.js Project</h3>
+                        <p class="mb-4 text-gray-700">Create a new directory for your project and initialize it with
+                            npm.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">mkdir my-mongodb-app
+cd my-mongodb-app
+npm init -y</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Required Packages</h3>
+                        <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction,
+                            and Dotenv for managing environment variables.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">npm install express mongoose dotenv</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">3. Create a `.env` file</h3>
+                        <p class="mb-4 text-gray-700">Create a `.env` file in your project's root directory. This file
+                            will store your database connection string, keeping it separate from your code. Remember to
+                            replace the placeholder with your actual connection string from MongoDB Atlas.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">MONGO_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.abcde.mongodb.net/myDatabase?retryWrites=true&w=majority</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="connection" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Database Connection</h2>
+                <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to
+                    MongoDB using Mongoose. This snippet sets up a basic Express server and establishes the database
+                    connection using the URI from your `.env` file.</p>
+                <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <pre><code class="language-javascript">// server.js
+
+require('dotenv').config(); // Load environment variables from .env file
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware to parse JSON bodies (added for CRUD)
+app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log('MongoDB connected successfully!');
+    })
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
+    });
+
+// Basic route
+app.get('/', (req, res) => {
+    res.send('Welcome to the MongoDB Node.js App!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});</code></pre>
+                </div>
+            </div>
+
+            <div id="schema" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Schema & Models</h2>
+                <p class="mb-6 text-lg text-gray-700">A Mongoose Schema defines the structure of your documents within a
+                    MongoDB collection. This is where you enforce data types, validation, and default values. Below is
+                    an example of a `User` schema. You can explore the different options available to customize your
+                    data model by clicking on them.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Example: `User.js`</h3>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// models/User.js
+
+const mongoose = require('mongoose');
+
+// Define the User Schema
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        match: [/.+@.+\..+/, 'Please fill a valid email address']
+    },
+    age: {
+        type: Number,
+        min: 0,
+        max: 120
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+// Create and export the User model
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;</code></pre>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Common Schema Options</h3>
+                        <div id="schema-options-container" class="space-y-2">
+                            <!-- Options will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="crud" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations</h2>
+                <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create,
+                    Read, Update, and Delete (CRUD) operations. This section provides the code for a basic API to manage
+                    users. Use the tabs to switch between different operations.</p>
+
+                <div class="border-b border-gray-200 mb-4">
+                    <nav class="flex space-x-2 sm:space-x-4" id="crud-tabs">
+                        <button class="crud-tab whitespace-nowrap active" data-target="crud-create">CREATE</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-read">READ</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-update">UPDATE</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-delete">DELETE</button>
+                    </nav>
+                </div>
+
+                <div id="crud-content" class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div id="crud-create" class="crud-content-panel active">
+                        <p class="mb-4 text-gray-700">Create a new user by sending a POST request to `/users` with the
+                            user data in the request body.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 1. Create a new user (POST /users)
+app.post('/users', async (req, res) => {
+    try {
+        const newUser = new User(req.body);
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});</code></pre>
+                        </div>
+                    </div>
+                    <div id="crud-read" class="crud-content-panel" style="display:none;">
+                        <p class="mb-4 text-gray-700">Read users from the database. You can either fetch all users with
+                            a GET request to `/users` or a single user by their ID with a GET request to `/users/:id`.
+                        </p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 2. Get all users (GET /users)
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// 3. Get a single user by ID (GET /users/:id)
+app.get('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});</code></pre>
+                        </div>
+                    </div>
+                    <div id="crud-update" class="crud-content-panel" style="display:none;">
+                        <p class="mb-4 text-gray-700">Update an existing user by sending a PUT request to `/users/:id`
+                            with the updated data in the request body.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 4. Update a user by ID (PUT /users/:id)
+app.put('/users/:id', async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(updatedUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});</code></pre>
+                        </div>
+                    </div>
+                    <div id="crud-delete" class="crud-content-panel" style="display:none;">
+                        <p class="mb-4 text-gray-700">Delete a user by sending a DELETE request to `/users/:id`.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 5. Delete a user by ID (DELETE /users/:id)
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="run" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test</h2>
+                <p class="mb-6 text-lg text-gray-700">With everything set up, you can now run your application and test
+                    the API endpoints. This section shows you how to start the server and provides example requests you
+                    can make using a tool like Postman or Insomnia.</p>
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Application</h3>
+                        <p class="mb-4 text-gray-700">Navigate to your project directory in the terminal and run your
+                            server. You should see console messages indicating a successful connection.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">node server.js</code></pre>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Test Your API</h3>
+                        <p class="mb-4 text-gray-700">Use an API testing tool to send requests to your server. Here's an
+                            example of how to create a new user:</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                            <p class="font-mono font-bold text-green-600">POST <span
+                                    class="text-gray-800">http://localhost:5000/users</span></p>
+                            <p class="mt-2 text-sm font-semibold text-gray-800">Headers:</p>
+                            <p class="font-mono text-sm ml-4 text-gray-700">Content-Type: application/json</p>
+                            <p class="mt-2 text-sm font-semibold text-gray-800">Body (raw JSON):</p>
+                            <div class="code-block bg-gray-800 text-white p-4 rounded-lg mt-1">
+                                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                <pre><code class="language-json">{
+    "name": "Alice Smith",
+    "email": "alice.smith@example.com",
+    "age": 28
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="best-practices" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
+                <p class="mb-6 text-lg text-gray-700">Building a robust application goes beyond the basics. This final
+                    section highlights key practices you should adopt for creating secure, scalable, and maintainable
+                    applications.</p>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><b>Error Handling:</b> Implement more robust error handling for production applications,
+                            possibly using custom middleware.</li>
+                        <li><b>Input Validation:</b> While Mongoose schemas offer basic validation, consider libraries
+                            like `Joi` or `express-validator` for more complex and comprehensive input validation.</li>
+                        <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain
+                                text</b>. Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
+                        <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication
+                            (e.g., JWT) and authorization mechanisms.</li>
+                        <li><b>Project Structure:</b> For larger applications, organize your code into separate folders
+                            for routes, controllers, models, services, etc.</li>
+                        <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to
+                            improve database performance (e.g., `email: { type: String, unique: true, index: true }`).
+                        </li>
+                        <li><b>Environment Variables:</b> Always use environment variables for sensitive data like
+                            database connection strings, especially when deploying your application.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Function to update active link
+            function updateActiveNavLink() {
+                let currentActiveSectionId = '';
+                for (let i = 0; i < contentSections.length; i++) {
+                    const section = contentSections[i];
+                    const rect = section.getBoundingClientRect();
+                    // Check if the top of the section is within the viewport, with a small offset
+                    if (rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3) {
+                        currentActiveSectionId = section.id;
+                        break;
+                    }
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-target') === currentActiveSectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            // Initial highlight on load
+            updateActiveNavLink();
+
+            // Event listener for scroll
+            window.addEventListener('scroll', updateActiveNavLink);
+
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+
+                    // Smooth scroll to target
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+
+                    // Manually update active class immediately on click
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            const crudTabs = document.querySelectorAll('.crud-tab');
+            const crudPanels = document.querySelectorAll('.crud-content-panel');
+
+            crudTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = tab.getAttribute('data-target');
+
+                    crudTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    crudPanels.forEach(panel => {
+                        panel.style.display = panel.id === targetId ? 'block' : 'none';
+                    });
+                });
+            });
+
+            const schemaOptionsData = [
+                { title: 'type', description: 'The data type for the field (e.g., String, Number, Date, Boolean, Array, ObjectId).', code: 'name: { type: String }' },
+                { title: 'required', description: 'If true, this field must have a value.', code: 'name: { required: true }' },
+                { title: 'unique', description: 'Creates a unique index for this field, preventing duplicate values.', code: 'email: { unique: true }' },
+                { title: 'default', description: 'Sets a default value if one is not provided.', code: 'isActive: { default: true }' },
+                { title: 'trim', description: 'For String types, removes whitespace from the beginning and end.', code: 'name: { trim: true }' },
+                { title: 'lowercase / uppercase', description: 'For String types, converts the value to the specified case.', code: 'email: { lowercase: true }' },
+                { title: 'min / max', description: 'For Number and Date types, sets minimum and maximum allowed values.', code: 'age: { min: 18, max: 65 }' },
+                { title: 'enum', description: 'For String types, specifies a list of allowed values.', code: 'status: { type: String, enum: ["pending", "active", "archived"] }' },
+                { title: 'match', description: 'For String types, provides a regular expression for validation.', code: 'zipCode: { match: /^\\d{5}$/ }' },
+                { title: 'ref', description: 'For ObjectId types, defines a relationship to another collection/model.', code: 'author: { type: mongoose.Schema.Types.ObjectId, ref: "User" }' }
+            ];
+
+            const optionsContainer = document.getElementById('schema-options-container');
+            schemaOptionsData.forEach((opt, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'border-b border-gray-200 py-2';
+                optionDiv.innerHTML = `
+                    <div class="schema-option-title flex justify-between items-center">
+                        <span>${opt.title}</span>
+                        <span class="plus-minus-icon transform transition-transform duration-300">&#43;</span>
+                    </div>
+                    <div class="schema-option-content mt-2 pl-2">
+                        <p class="text-sm text-gray-600 mb-2">${opt.description}</p>
+                        <div class="code-block bg-gray-800 text-white p-2 rounded">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">${opt.code}</code></pre>
+                        </div>
+                    </div>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            document.querySelectorAll('.schema-option-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    const content = title.nextElementSibling;
+                    const icon = title.querySelector('.plus-minus-icon');
+                    const isActive = content.classList.contains('active');
+
+                    // Close all others
+                    document.querySelectorAll('.schema-option-content.active').forEach(openContent => {
+                        if (openContent !== content) {
+                            openContent.classList.remove('active');
+                            const openIcon = openContent.previousElementSibling.querySelector('.plus-minus-icon');
+                            openIcon.innerHTML = '&#43;';
+                            openIcon.classList.remove('rotate-45');
+                        }
+                    });
+
+                    // Toggle current
+                    content.classList.toggle('active');
+                    if (!isActive) {
+                        icon.innerHTML = '&#8722;'; // Minus sign
+                        icon.classList.add('rotate-45');
+                    } else {
+                        icon.innerHTML = '&#43;'; // Plus sign
+                        icon.classList.remove('rotate-45');
+                    }
+                });
+            });
+        });
+
+        function copyCode(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.querySelector('pre code').innerText;
+
+            // Using execCommand for iframe compatibility
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                button.innerText = 'Copied!';
+            } catch (err) {
+                button.innerText = 'Failed!';
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textarea);
+
+            setTimeout(() => {
+                button.innerText = 'Copy';
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
