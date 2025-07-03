@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,25 +13,22 @@
 
     <!-- 
         Chosen Palette: Warm Neutrals with Dark Accents (inspired by femi-ts-note.vercel.app)
-        Application Structure Plan: The application now features a fixed header navigation bar at the top, replacing the left-side sidebar. This design prioritizes content readability and quick access to different sections via the header's smooth scroll-to-anchor functionality. On smaller screens, the header navigation will adapt to be horizontally scrollable to accommodate many links. New sections are added for React frontend setup and integration. Key interactive elements like tabbed CRUD operations and expandable schema options are retained and styled to integrate seamlessly with the new aesthetic, enhancing usability and content exploration. A search bar is included in the header for visual consistency.
-        Visualization & Content Choices: The source material is a technical guide. Goal: Organize Content -> Viz: Fixed Header Navigation (scroll-to-anchor) + Search Input -> Interaction: Click to scroll to content sections, visual search bar, and automatic highlighting of active section on scroll -> Justification: Provides persistent navigation and a familiar UI pattern for content discovery, enhancing user orientation within the long-form content. Goal: Explain CRUD -> Viz: Tabbed component -> Interaction: Click to switch between Create/Read/Update/Delete code -> Justification: Efficiently presents related code snippets without overwhelming the user. Goal: Detail Schema Options -> Viz: Interactive, collapsible list -> Interaction: Click to expand/collapse details -> Justification: Allows users to explore details on demand, keeping the main view clean. Goal: Make Code Usable -> Viz: "Copy" button on code blocks -> Interaction: Click to copy to clipboard -> Justification: Improves developer workflow by making code snippets easily transferable. Goal: Introduce React Integration -> Viz: Dedicated React Frontend section with code blocks and live rendering -> Interaction: Live React component for user creation, demonstrating frontend-backend communication -> Justification: Provides practical, runnable examples of React's role in the MERN stack, making the learning experience hands-on and immediately verifiable. No charts are used as the content is purely instructional and textual.
+        Application Structure Plan: The application now covers the full MERN stack and is enhanced for responsiveness. It features a distinct, fixed sidebar for navigation and a scrollable main content area. On smaller screens, the sidebar collapses to the top, taking full width, while the main content adjusts its padding. On medium and larger screens, the sidebar remains fixed on the left. This design prioritizes content readability and quick access to different sections via the sidebar's smooth scroll-to-anchor functionality, which is effective across devices. New sections are added for React frontend setup and integration. Key interactive elements like tabbed CRUD operations and expandable schema options are retained and styled to integrate seamlessly with the new aesthetic, enhancing usability and content exploration. A search bar is added to the sidebar for visual consistency, though its functionality is limited to UI resemblance in this iteration.
+        Visualization & Content Choices: The source material is a technical guide. Goal: Organize Content -> Viz: Fixed Sidebar Navigation (scroll-to-anchor) + Search Input -> Interaction: Click to scroll to content sections, visual search bar, and automatic highlighting of active section on scroll -> Justification: Provides persistent navigation and a familiar UI pattern for content discovery, enhancing user orientation within the long-form content. Goal: Explain CRUD -> Viz: Tabbed component -> Interaction: Click to switch between Create/Read/Update/Delete code -> Justification: Efficiently presents related code snippets without overwhelming the user. Goal: Detail Schema Options -> Viz: Interactive, collapsible list -> Interaction: Click to expand/collapse details -> Justification: Allows users to explore details on demand, keeping the main view clean. Goal: Make Code Usable -> Viz: "Copy" button on code blocks -> Interaction: Click to copy to clipboard -> Justification: Improves developer workflow by making code snippets easily transferable. Goal: Introduce React Integration -> Viz: Dedicated React Frontend section with code blocks and live rendering -> Interaction: Live React component for user creation, demonstrating frontend-backend communication -> Justification: Provides practical, runnable examples of React's role in the MERN stack, making the learning experience hands-on and immediately verifiable. No charts are used as the content is purely instructional and textual.
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-
         .code-block {
             position: relative;
         }
-
         .copy-button {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            /* Subtle white for dark background */
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle white for dark background */
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
@@ -41,48 +37,35 @@
             opacity: 0.7;
             transition: opacity 0.2s, background-color 0.2s;
         }
-
         .code-block:hover .copy-button {
             opacity: 1;
             background-color: rgba(255, 255, 255, 0.2);
         }
-
         .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            /* Lighter background for active */
+            background-color: rgba(255, 255, 255, 0.1); /* Lighter background for active */
             color: white;
             font-weight: 600;
         }
-
         .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            /* Even lighter hover */
+            background-color: rgba(255, 255, 255, 0.05); /* Even lighter hover */
         }
-
         .crud-tab {
             padding: 0.75rem 1rem;
             border-bottom-width: 2px;
             border-color: transparent;
             font-weight: 500;
-            color: #6B7280;
-            /* gray-500 */
+            color: #6B7280; /* gray-500 */
             transition: all 0.2s;
         }
-
         .crud-tab:hover {
-            color: #1F2937;
-            /* gray-900 */
-            border-color: #E5E7EB;
-            /* gray-200 */
+            color: #1F2937; /* gray-900 */
+            border-color: #E5E7EB; /* gray-200 */
         }
-
         .crud-tab.active {
-            border-color: #1F2937;
-            /* gray-900 */
+            border-color: #1F2937; /* gray-900 */
             color: #1F2937;
             font-weight: 600;
         }
-
         .schema-option-title {
             cursor: pointer;
             padding: 0.5rem 0;
@@ -90,324 +73,170 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
-            color: #374151;
-            /* gray-700 */
+            color: #374151; /* gray-700 */
             transition: color 0.2s;
         }
-
         .schema-option-title:hover {
-            color: #1F2937;
-            /* gray-900 */
+            color: #1F2937; /* gray-900 */
         }
-
         .schema-option-content {
             display: none;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
         }
-
         .schema-option-content.active {
             display: block;
-            max-height: 500px;
-            /* Adjust as needed */
+            max-height: 500px; /* Adjust as needed */
         }
-
         .plus-minus-icon {
             font-size: 1.2rem;
             line-height: 1;
             transform-origin: center;
         }
-
         .rotate-45 {
             transform: rotate(45deg);
         }
 
-        /* Header Navigation Specific Styles */
-        .header-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            /* Ensure it stays on top */
-            height: auto;
-            /* Height adapts to content */
-            overflow-x: auto;
-            /* Allow horizontal scrolling for nav links if they overflow */
-            overflow-y: hidden;
-            /* Prevent vertical scrolling */
-            white-space: nowrap;
-            /* Keep nav links on a single line */
-            display: flex;
-            /* Use flexbox for horizontal alignment */
-            align-items: center;
-            /* Vertically align items */
-            padding: 0.5rem 1rem;
-            /* Adjust padding */
-            border-bottom: 1px solid #1F2937;
-            /* Add bottom border */
-        }
-
-        .header-nav .nav-list {
-            display: flex;
-            flex-direction: row;
-            /* Always horizontal */
-            align-items: center;
-            gap: 0.5rem;
-            /* Gap between nav items */
-            padding: 0;
-            /* Remove default ul padding */
-            margin: 0;
-            /* Remove default ul margin */
-        }
-
-        .header-nav .nav-link {
-            padding: 0.5rem 0.75rem;
-            /* Compact padding for horizontal links */
-            font-size: 0.875rem;
-            /* Smaller font size for links */
-            display: flex;
-            /* Ensure icon and text are inline */
-            align-items: center;
-        }
-
-        .header-nav .nav-link span {
-            margin-right: 0.5rem;
-            /* Space between icon and text */
-            font-size: 1rem;
-            /* Adjust icon size */
-            display: inline-block;
-            /* Ensure icons are always visible */
-        }
-
-        .header-nav h1 {
-            flex-shrink: 0;
-            /* Prevent title from shrinking */
-            margin-right: 1.5rem;
-            /* Space between title and search/nav */
-            margin-bottom: 0;
-            /* Remove bottom margin */
-        }
-
-        .header-nav .search-input-container {
-            flex-grow: 1;
-            /* Allow search input to take available space */
-            max-width: 200px;
-            /* Limit search input width */
-            margin-right: 1rem;
-            /* Space after search input */
-        }
-
-        /* Adjust main content padding to account for fixed header */
-        .main-content-padding {
-            padding-top: 5rem;
-            /* Adjust this value based on your header's actual height */
-        }
-
-        /* Responsive adjustments for header on smaller screens */
+        /* Responsive adjustments for sidebar on small screens */
         @media (max-width: 767px) {
-            .header-nav {
-                flex-wrap: wrap;
-                /* Allow items to wrap on smaller screens */
-                justify-content: center;
-                /* Center items when wrapped */
-                padding: 0.75rem 0.5rem;
-                /* More vertical padding for wrapped content */
+            .sidebar-nav {
+                position: relative; /* Remove sticky on small screens if it causes issues */
+                height: auto; /* Allow height to adjust to content */
+                max-height: 50vh; /* Limit height to prevent excessive scrolling on small screens */
+                overflow-y: auto; /* Enable scrolling within sidebar if content overflows */
+                border-right: none; /* Remove right border when stacked */
+                border-bottom: 1px solid #1F2937; /* Add bottom border */
             }
-
-            .header-nav h1 {
-                width: 100%;
-                /* Title takes full width */
+            .sidebar-nav ul {
+                flex-direction: row; /* Make nav links horizontal on small screens */
+                flex-wrap: wrap; /* Allow links to wrap */
+                justify-content: center; /* Center links */
+                gap: 0.5rem; /* Small gap between links */
+            }
+            .sidebar-nav li {
+                width: auto; /* Allow links to take natural width */
+            }
+            .sidebar-nav .nav-link {
+                padding: 0.5rem 0.75rem; /* Smaller padding for links */
+                font-size: 0.875rem; /* Smaller font size */
+            }
+            .sidebar-nav .nav-link span {
+                display: none; /* Hide icons on small screens to save space */
+            }
+            .sidebar-nav h1 {
                 text-align: center;
-                margin-bottom: 0.5rem;
-                /* Add some space below title */
-                margin-right: 0;
-                /* Remove right margin */
+                margin-bottom: 1rem;
             }
-
-            .header-nav .search-input-container {
-                width: 100%;
-                /* Search input takes full width */
-                max-width: none;
-                /* Remove max-width constraint */
-                margin-bottom: 0.5rem;
-                /* Add space below search */
-                margin-right: 0;
-                /* Remove right margin */
-            }
-
-            .header-nav .nav-list {
-                width: 100%;
-                /* Nav list takes full width */
-                justify-content: center;
-                /* Center nav items */
-                overflow-x: auto;
-                /* Ensure horizontal scrolling for nav links */
-                padding-bottom: 0.5rem;
-                /* Add padding for scrollbar */
-            }
-
-            .header-nav .nav-link {
-                padding: 0.4rem 0.6rem;
-                /* Even smaller padding for very small screens */
-                font-size: 0.8rem;
-                /* Even smaller font size */
-            }
-
-            .header-nav .nav-link span {
-                margin-right: 0.25rem;
-                /* Reduce icon margin */
-            }
-
-            .main-content-padding {
-                padding-top: 8rem;
-                /* Increase padding for smaller screens if header wraps */
-            }
-        }
-
-        @media (min-width: 768px) {
-            .header-nav {
-                flex-wrap: nowrap;
-                /* Prevent wrapping on larger screens */
-                justify-content: flex-start;
-                /* Align items to start */
+            .sidebar-nav input {
+                margin-bottom: 1rem; /* Adjust margin for search bar */
             }
         }
     </style>
 </head>
-
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Header Navigation -->
-    <nav class="w-full bg-gray-900 text-gray-200 header-nav">
-        <h1 class="text-2xl font-bold text-white">
-            <span class="text-blue-400">MERN</span> Stack Guide
-        </h1>
-
-        <div class="search-input-container">
-            <input type="text" placeholder="Search guide..."
-                class="w-full p-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-blue-500 placeholder-gray-500">
-        </div>
-
-        <ul class="nav-list">
-            <li><a href="#overview" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700 active"
-                    data-target="overview">
-                    <span>&#128218;</span> Overview
-                </a></li>
-            <li><a href="#setup" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="setup">
-                    <span>&#128187;</span> Setup
-                </a></li>
-            <li><a href="#connection" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="connection">
-                    <span>&#128279;</span> Backend
-                </a></li>
-            <li><a href="#schema" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="schema">
-                    <span>&#128203;</span> Schema
-                </a></li>
-            <li><a href="#crud" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="crud">
-                    <span>&#128196;</span> CRUD
-                </a></li>
-            <li><a href="#react-frontend" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="react-frontend">
-                    <span>&#128187;</span> React
-                </a></li>
-            <li><a href="#run" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="run">
-                    <span>&#128640;</span> Test
-                </a></li>
-            <li><a href="#best-practices" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
-                    data-target="best-practices">
-                    <span>&#128200;</span> Best Practices
-                </a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-6 pt-26 md:p-10 space-y-12 bg-white main-content-padding">
-        <div id="overview" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Overview & Prerequisites</h2>
-            <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for building a **MERN
-                stack** application, combining **MongoDB** (database), **Express.js** (backend framework), **React**
-                (frontend library), and **Node.js** (runtime environment). You'll learn how to set up your project,
-                define data models, perform CRUD operations, and build an interactive React frontend that communicates
-                with your backend. This section outlines the tools you'll need to follow along.</p>
-            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
-                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                    <li><b>Node.js and npm:</b> Required for running the application and managing packages. Download
-                        from <a href="https://nodejs.org/" target="_blank"
-                            class="text-blue-600 hover:underline">nodejs.org</a>.</li>
-                    <li><b>MongoDB:</b> Your database. You can run it locally or use a cloud service.
-                        <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
-                            <li><b>Local:</b> Install MongoDB Community Server from <a
-                                    href="https://www.mongodb.com/try/download/community" target="_blank"
-                                    class="text-blue-600 hover:underline">mongodb.com</a>.</li>
-                            <li><b>Cloud (Recommended):</b> Set up a free cluster on <a
-                                    href="https://www.mongodb.com/cloud/atlas" target="_blank"
-                                    class="text-blue-600 hover:underline">MongoDB Atlas</a>.</li>
-                        </ul>
-                    </li>
-                    <li><b>Text Editor:</b> A code editor like VS Code is recommended.</li>
-                </ul>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <nav class="w-full md:w-64 bg-gray-900 text-gray-200 p-4 md:p-6 flex-shrink-0 sticky top-0 h-screen overflow-y-auto border-r border-gray-800 sidebar-nav">
+            <h1 class="text-2xl font-bold text-white mb-6">
+                <span class="text-blue-400">MERN</span> Stack Guide
+            </h1>
+            
+            <div class="mb-6">
+                <input type="text" placeholder="Search guide..." class="w-full p-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-blue-500 placeholder-gray-500">
             </div>
-        </div>
 
-        <div id="setup" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Initial Setup</h2>
-            <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your
-                Node.js project, installing the necessary libraries, and configuring your environment to securely
-                connect to your database. Follow these steps to build the foundation of your backend application.</p>
+            <ul class="space-y-2 md:block flex flex-wrap justify-center">
+                <li><a href="#overview" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700 active" data-target="overview">
+                    <span class="mr-3 text-lg md:inline">&#128218;</span> Overview & Prerequisites
+                </a></li>
+                <li><a href="#setup" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="setup">
+                    <span class="mr-3 text-lg md:inline">&#128187;</span> Initial Setup
+                </a></li>
+                <li><a href="#connection" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="connection">
+                    <span class="mr-3 text-lg md:inline">&#128279;</span> Backend Connection
+                </a></li>
+                <li><a href="#schema" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="schema">
+                    <span class="mr-3 text-lg md:inline">&#128203;</span> Schema & Models
+                </a></li>
+                <li><a href="#crud" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="crud">
+                    <span class="mr-3 text-lg md:inline">&#128196;</span> CRUD Operations
+                </a></li>
+                <li><a href="#react-frontend" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="react-frontend">
+                    <span class="mr-3 text-lg md:inline">&#128187;</span> React Frontend
+                </a></li>
+                <li><a href="#run" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="run">
+                    <span class="mr-3 text-lg md:inline">&#128640;</span> Run & Test
+                </a></li>
+                <li><a href="#best-practices" class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="best-practices">
+                    <span class="mr-3 text-lg md:inline">&#128200;</span> Best Practices
+                </a></li>
+            </ul>
+        </nav>
 
-            <div class="space-y-8">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10 space-y-12 bg-white">
+            <div id="overview" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Overview & Prerequisites</h2>
+                <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for building a **MERN stack** application, combining **MongoDB** (database), **Express.js** (backend framework), **React** (frontend library), and **Node.js** (runtime environment). You'll learn how to set up your project, define data models, perform CRUD operations, and build an interactive React frontend that communicates with your backend. This section outlines the tools you'll need to follow along.</p>
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Set up your Node.js Project</h3>
-                    <p class="mb-4 text-gray-700">Create a new directory for your project and initialize it with npm.
-                    </p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash">mkdir my-mern-app
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><b>Node.js and npm:</b> Required for running the application and managing packages. Download from <a href="https://nodejs.org/" target="_blank" class="text-blue-600 hover:underline">nodejs.org</a>.</li>
+                        <li><b>MongoDB:</b> Your database. You can run it locally or use a cloud service.
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><b>Local:</b> Install MongoDB Community Server from <a href="https://www.mongodb.com/try/download/community" target="_blank" class="text-blue-600 hover:underline">mongodb.com</a>.</li>
+                                <li><b>Cloud (Recommended):</b> Set up a free cluster on <a href="https://www.mongodb.com/cloud/atlas" target="_blank" class="text-blue-600 hover:underline">MongoDB Atlas</a>.</li>
+                            </ul>
+                        </li>
+                        <li><b>Text Editor:</b> A code editor like VS Code is recommended.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="setup" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Initial Setup</h2>
+                <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your Node.js project, installing the necessary libraries, and configuring your environment to securely connect to your database. Follow these steps to build the foundation of your backend application.</p>
+                
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Set up your Node.js Project</h3>
+                        <p class="mb-4 text-gray-700">Create a new directory for your project and initialize it with npm.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">mkdir my-mern-app
 cd my-mern-app
 npm init -y</code></pre>
+                        </div>
                     </div>
-                </div>
-
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Backend Packages</h3>
-                    <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction,
-                        Dotenv for environment variables, and `cors` for handling cross-origin requests from your React
-                        frontend.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash">npm install express mongoose dotenv cors</code></pre>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Backend Packages</h3>
+                        <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction, Dotenv for environment variables, and `cors` for handling cross-origin requests from your React frontend.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">npm install express mongoose dotenv cors</code></pre>
+                        </div>
                     </div>
-                </div>
 
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">3. Create a `.env` file</h3>
-                    <p class="mb-4 text-gray-700">Create a `.env` file in your project's root directory. This file will
-                        store your database connection string, keeping it separate from your code. Remember to replace
-                        the placeholder with your actual connection string from MongoDB Atlas.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash">MONGO_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.abcde.mongodb.net/myDatabase?retryWrites=true&w=majority</code></pre>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">3. Create a `.env` file</h3>
+                        <p class="mb-4 text-gray-700">Create a `.env` file in your project's root directory. This file will store your database connection string, keeping it separate from your code. Remember to replace the placeholder with your actual connection string from MongoDB Atlas.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">MONGO_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.abcde.mongodb.net/myDatabase?retryWrites=true&w=majority</code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="connection" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Backend Connection (Node.js & Express)</h2>
-            <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to
-                MongoDB using Mongoose. This snippet sets up a basic Express server, establishes the database connection
-                using the URI from your `.env` file, and includes the `cors` middleware, which is crucial for allowing
-                your React frontend to make requests to this backend.</p>
-            <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                <pre><code class="language-javascript">// server.js
+            <div id="connection" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Backend Connection (Node.js & Express)</h2>
+                 <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to MongoDB using Mongoose. This snippet sets up a basic Express server, establishes the database connection using the URI from your `.env` file, and includes the `cors` middleware, which is crucial for allowing your React frontend to make requests to this backend.</p>
+                 <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <pre><code class="language-javascript">// server.js
 
 require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
@@ -452,21 +281,18 @@ app.post('/users', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });</code></pre>
+                </div>
             </div>
-        </div>
 
-        <div id="schema" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Schema & Models</h2>
-            <p class="mb-6 text-lg text-gray-700">A Mongoose Schema defines the structure of your documents within a
-                MongoDB collection. This is where you enforce data types, validation, and default values. Below is an
-                example of a `User` schema. You can explore the different options available to customize your data model
-                by clicking on them.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Example: `User.js`</h3>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-javascript">// models/User.js
+            <div id="schema" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Schema & Models</h2>
+                <p class="mb-6 text-lg text-gray-700">A Mongoose Schema defines the structure of your documents within a MongoDB collection. This is where you enforce data types, validation, and default values. Below is an example of a `User` schema. You can explore the different options available to customize your data model by clicking on them.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Example: `User.js`</h3>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// models/User.js
 
 const mongoose = require('mongoose');
 
@@ -503,39 +329,36 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;</code></pre>
+                        </div>
                     </div>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Common Schema Options</h3>
-                    <div id="schema-options-container" class="space-y-2">
-                        <!-- Options will be injected by JS -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Common Schema Options</h3>
+                        <div id="schema-options-container" class="space-y-2">
+                            <!-- Options will be injected by JS -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="crud" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations (Backend)</h2>
-            <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create, Read,
-                Update, and Delete (CRUD) operations. This section provides the Express.js code for a basic API to
-                manage users. Use the tabs to switch between different operations.</p>
+            <div id="crud" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations (Backend)</h2>
+                <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create, Read, Update, and Delete (CRUD) operations. This section provides the Express.js code for a basic API to manage users. Use the tabs to switch between different operations.</p>
+                
+                <div class="border-b border-gray-200 mb-4">
+                    <nav class="flex space-x-2 sm:space-x-4" id="crud-tabs">
+                        <button class="crud-tab whitespace-nowrap active" data-target="crud-create">CREATE</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-read">READ</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-update">UPDATE</button>
+                        <button class="crud-tab whitespace-nowrap" data-target="crud-delete">DELETE</button>
+                    </nav>
+                </div>
 
-            <div class="border-b border-gray-200 mb-4">
-                <nav class="flex space-x-2 sm:space-x-4" id="crud-tabs">
-                    <button class="crud-tab whitespace-nowrap active" data-target="crud-create">CREATE</button>
-                    <button class="crud-tab whitespace-nowrap" data-target="crud-read">READ</button>
-                    <button class="crud-tab whitespace-nowrap" data-target="crud-update">UPDATE</button>
-                    <button class="crud-tab whitespace-nowrap" data-target="crud-delete">DELETE</button>
-                </nav>
-            </div>
-
-            <div id="crud-content" class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                <div id="crud-create" class="crud-content-panel active">
-                    <p class="mb-4 text-gray-700">Create a new user by sending a POST request to `/users` with the user
-                        data in the request body.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-javascript">// 1. Create a new user (POST /users)
+                <div id="crud-content" class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div id="crud-create" class="crud-content-panel active">
+                         <p class="mb-4 text-gray-700">Create a new user by sending a POST request to `/users` with the user data in the request body.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 1. Create a new user (POST /users)
 app.post('/users', async (req, res) => {
     try {
         const newUser = new User(req.body);
@@ -545,14 +368,13 @@ app.post('/users', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });</code></pre>
+                        </div>
                     </div>
-                </div>
-                <div id="crud-read" class="crud-content-panel" style="display:none;">
-                    <p class="mb-4 text-gray-700">Read users from the database. You can either fetch all users with a
-                        GET request to `/users` or a single user by their ID with a GET request to `/users/:id`.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-javascript">// 2. Get all users (GET /users)
+                    <div id="crud-read" class="crud-content-panel" style="display:none;">
+                         <p class="mb-4 text-gray-700">Read users from the database. You can either fetch all users with a GET request to `/users` or a single user by their ID with a GET request to `/users/:id`.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 2. Get all users (GET /users)
 app.get('/users', async (req, res) => {
     try {
         const users = await User.find();
@@ -574,14 +396,13 @@ app.get('/users/:id', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });</code></pre>
+                        </div>
                     </div>
-                </div>
-                <div id="crud-update" class="crud-content-panel" style="display:none;">
-                    <p class="mb-4 text-gray-700">Update an existing user by sending a PUT request to `/users/:id` with
-                        the updated data in the request body.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-javascript">// 4. Update a user by ID (PUT /users/:id)
+                    <div id="crud-update" class="crud-content-panel" style="display:none;">
+                         <p class="mb-4 text-gray-700">Update an existing user by sending a PUT request to `/users/:id` with the updated data in the request body.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 4. Update a user by ID (PUT /users/:id)
 app.put('/users/:id', async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(
@@ -597,13 +418,13 @@ app.put('/users/:id', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });</code></pre>
+                        </div>
                     </div>
-                </div>
-                <div id="crud-delete" class="crud-content-panel" style="display:none;">
-                    <p class="mb-4 text-gray-700">Delete a user by sending a DELETE request to `/users/:id`.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-javascript">// 5. Delete a user by ID (DELETE /users/:id)
+                    <div id="crud-delete" class="crud-content-panel" style="display:none;">
+                         <p class="mb-4 text-gray-700">Delete a user by sending a DELETE request to `/users/:id`.</p>
+                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-javascript">// 5. Delete a user by ID (DELETE /users/:id)
 app.delete('/users/:id', async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
@@ -615,28 +436,22 @@ app.delete('/users/:id', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });</code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="react-frontend" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">React Frontend</h2>
-            <p class="mb-6 text-lg text-gray-700">React will serve as your frontend library, providing a component-based
-                approach to building dynamic user interfaces. Below is a basic React component that demonstrates how to
-                create a user and fetch a list of users from your Node.js backend. This section also includes a live
-                interactive demo.</p>
+            <div id="react-frontend" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">React Frontend</h2>
+                <p class="mb-6 text-lg text-gray-700">React will serve as your frontend library, providing a component-based approach to building dynamic user interfaces. Below is a basic React component that demonstrates how to create a user and fetch a list of users from your Node.js backend. This section also includes a live interactive demo.</p>
 
-            <div class="space-y-8">
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">React `App` Component (`App.js` conceptual)
-                    </h3>
-                    <p class="mb-4 text-gray-700">This code defines a simple React component that allows you to create a
-                        new user and displays a list of existing users fetched from your backend. Pay attention to the
-                        `fetch` calls for interacting with your Node.js API.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-jsx">
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">React `App` Component (`App.js` conceptual)</h3>
+                        <p class="mb-4 text-gray-700">This code defines a simple React component that allows you to create a new user and displays a list of existing users fetched from your backend. Pay attention to the `fetch` calls for interacting with your Node.js API.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-jsx">
 // This code would typically be in a file like src/App.js in a React project.
 // For this single HTML file, it's embedded and transpiled by Babel.
 
@@ -756,97 +571,78 @@ function App() {
             {responseMessage && (
                 <div className={`p-3 rounded-md text-sm ${responseMessage.startsWith('Error') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
                     <pre>{responseMessage}</pre>
-                    </div>
-                    )}
+                </div>
+            )}
 
-                    <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
-                    {loading && <p>Loading users...</p>}
-                    {!loading && users.length === 0 && <p>No users found. Create one above! دستیاب نہیں ہے!</p>}
-                    {!loading && users.length > 0 && (
-                    <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-                        {users.map(user => (
+            <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
+            {loading && <p>Loading users...</p>}
+            {!loading && users.length === 0 && <p>No users found. Create one above!</p>}
+            {!loading && users.length > 0 && (
+                <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                    {users.map(user => (
                         <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
-                            <b>Name:</b> {user.name} <br />
-                            <b>Email:</b> {user.email} <br />
+                            <b>Name:</b> {user.name} <br/>
+                            <b>Email:</b> {user.email} <br/>
                             <b>Age:</b> {user.age || 'N/A'}
                         </li>
-                        ))}
-                    </ul>
-                    )}
-                </div>
-                );
-                }
-                </code></pre>
-            </div>
-        </div>
-
-        <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-            <h3 class="text-xl font-semibold mb-2 text-gray-800">Live React Demo</h3>
-            <p class="mb-4 text-gray-700">This is a live rendering of the React component above. Ensure your Node.js
-                backend is running on `http://localhost:5000` to interact with it.</p>
-            <div id="react-root" class="p-4 bg-gray-100 rounded-lg shadow-inner border border-gray-300">
-                <!-- React app will be mounted here -->
-            </div>
-        </div>
-        </div>
-        </div>
-
-        <div id="run" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test (MERN Stack)</h2>
-            <p class="mb-6 text-lg text-gray-700">To test your full MERN stack application, you need to run both your
-                Node.js backend and open this HTML file in your browser. The React frontend within this HTML file will
-                then communicate with your running backend.</p>
-            <div class="space-y-8">
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Node.js Backend</h3>
-                    <p class="mb-4 text-gray-700">Navigate to your `my-mern-app` project directory in the terminal and
-                        run your `server.js` file. This will start your Express server on `http://localhost:5000`.</p>
-                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash">node server.js</code></pre>
-                    </div>
-                    <p class="mt-4 text-gray-700"><strong class="text-red-500 font-bold">It is critical to keep this
-                            terminal window open and running while you interact with the frontend!</strong></p>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Open the React Frontend</h3>
-                    <p class="mb-4 text-gray-700">Simply open this HTML file (`index.html` if you saved it) directly in
-                        your web browser. The embedded React application will automatically load and attempt to connect
-                        to your running Node.js backend. Use the "Live React Demo" section above to interact with your
-                        backend.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="best-practices" class="content-section">
-            <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
-            <p class="mb-6 text-lg text-gray-700">Building a robust MERN stack application goes beyond the basics. This
-                final section highlights key practices you should adopt for creating secure, scalable, and maintainable
-                applications.</p>
-            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                <ul class="list-disc list-inside space-y-3 text-gray-700">
-                    <li><b>Error Handling:</b> Implement more robust error handling for production applications, both in
-                        backend (Express) and frontend (React).</li>
-                    <li><b>Input Validation:</b> Use validation libraries (e.g., `Joi` on backend, form validation in
-                        React) for comprehensive input validation.</li>
-                    <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain text</b>.
-                        Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
-                    <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication
-                        (e.g., JWT) and authorization mechanisms across both frontend and backend.</li>
-                    <li><b>Project Structure:</b> For larger applications, organize your code into separate folders for
-                        backend (e.g., `server/`) and frontend (e.g., `client/` or `frontend/`), typically using tools
-                        like Create React App or Vite for the frontend.</li>
-                    <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to improve
-                        database performance (e.g., `email: { type: String, unique: true, index: true }`).</li>
-                    <li><b>Environment Variables:</b> Always use environment variables for sensitive data like database
-                        connection strings.</li>
-                    <li><b>CORS Policies:</b> For production, configure CORS more restrictively, allowing requests only
-                        from your specific frontend domain(s).</li>
+                    ))}
                 </ul>
-            </div>
+            )}
         </div>
+    );
+}
+                            </code></pre>
+                        </div>
+                    </div>
 
-    </main>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Live React Demo</h3>
+                        <p class="mb-4 text-gray-700">This is a live rendering of the React component above. Ensure your Node.js backend is running on `http://localhost:5000` to interact with it.</p>
+                        <div id="react-root" class="p-4 bg-gray-100 rounded-lg shadow-inner border border-gray-300">
+                            <!-- React app will be mounted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="run" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test (MERN Stack)</h2>
+                <p class="mb-6 text-lg text-gray-700">To test your full MERN stack application, you need to run both your Node.js backend and open this HTML file in your browser. The React frontend within this HTML file will then communicate with your running backend.</p>
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Node.js Backend</h3>
+                        <p class="mb-4 text-gray-700">Navigate to your `my-mern-app` project directory in the terminal and run your `server.js` file. This will start your Express server on `http://localhost:5000`.</p>
+                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code class="language-bash">node server.js</code></pre>
+                        </div>
+                        <p class="mt-4 text-gray-700"><strong class="text-red-500 font-bold">It is critical to keep this terminal window open and running while you interact with the frontend!</strong></p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Open the React Frontend</h3>
+                        <p class="mb-4 text-gray-700">Simply open this HTML file (`index.html` if you saved it) directly in your web browser. The embedded React application will automatically load and attempt to connect to your running Node.js backend. Use the "Live React Demo" section above to interact with your backend.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="best-practices" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
+                <p class="mb-6 text-lg text-gray-700">Building a robust MERN stack application goes beyond the basics. This final section highlights key practices you should adopt for creating secure, scalable, and maintainable applications.</p>
+                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><b>Error Handling:</b> Implement more robust error handling for production applications, both in backend (Express) and frontend (React).</li>
+                        <li><b>Input Validation:</b> Use validation libraries (e.g., `Joi` on backend, form validation in React) for comprehensive input validation.</li>
+                        <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain text</b>. Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
+                        <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication (e.g., JWT) and authorization mechanisms across both frontend and backend.</li>
+                        <li><b>Project Structure:</b> For larger applications, organize your code into separate folders for backend (e.g., `server/`) and frontend (e.g., `client/` or `frontend/`), typically using tools like Create React App or Vite for the frontend.</li>
+                        <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to improve database performance (e.g., `email: { type: String, unique: true, index: true }`).</li>
+                        <li><b>Environment Variables:</b> Always use environment variables for sensitive data like database connection strings.</li>
+                        <li><b>CORS Policies:</b> For production, configure CORS more restrictively, allowing requests only from your specific frontend domain(s).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
     </div>
 
     <script type="text/babel">
@@ -979,8 +775,8 @@ function App() {
                         <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
                             {users.map(user => (
                                 <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
-                                    <b>Name:</b> {user.name} <br />
-                                    <b>Email:</b> {user.email} <br />
+                                    <b>Name:</b> {user.name} <br/>
+                                    <b>Email:</b> {user.email} <br/>
                                     <b>Age:</b> {user.age || 'N/A'}
                                 </li>
                             ))}
@@ -1002,18 +798,17 @@ function App() {
         document.addEventListener('DOMContentLoaded', function () {
             const navLinks = document.querySelectorAll('.nav-link');
             const contentSections = document.querySelectorAll('.content-section');
-
+            
             // Function to update active link
             function updateActiveNavLink() {
                 let currentActiveSectionId = '';
-                // Adjust this offset based on your header's height
-                const headerHeight = document.querySelector('.header-nav').offsetHeight;
-                const offset = headerHeight + 20; // A little extra buffer
+                // Adjust this offset based on your header/sticky elements if needed
+                const offset = window.innerHeight / 3; 
 
                 for (let i = 0; i < contentSections.length; i++) {
                     const section = contentSections[i];
                     const rect = section.getBoundingClientRect();
-                    // Check if the top of the section is within the viewport, with an offset from the header
+                    // Check if the top of the section is within the viewport, with a small offset
                     if (rect.top <= offset && rect.bottom >= offset) {
                         currentActiveSectionId = section.id;
                         break;
@@ -1041,21 +836,18 @@ function App() {
                     e.preventDefault();
                     const targetId = link.getAttribute('data-target');
                     const targetElement = document.getElementById(targetId);
-                    const headerOffset = document.querySelector('.header-nav').offsetHeight;
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset - 10; // Add a small buffer
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
+                    // Smooth scroll to target
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
 
                     // Manually update active class immediately on click
                     navLinks.forEach(navLink => navLink.classList.remove('active'));
                     link.classList.add('active');
                 });
             });
-
+            
             const crudTabs = document.querySelectorAll('.crud-tab');
             const crudPanels = document.querySelectorAll('.crud-content-panel');
 
@@ -1063,10 +855,10 @@ function App() {
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = tab.getAttribute('data-target');
-
+                    
                     crudTabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-
+                    
                     crudPanels.forEach(panel => {
                         panel.style.display = panel.id === targetId ? 'block' : 'none';
                     });
@@ -1105,13 +897,13 @@ function App() {
                 `;
                 optionsContainer.appendChild(optionDiv);
             });
-
+            
             document.querySelectorAll('.schema-option-title').forEach(title => {
                 title.addEventListener('click', () => {
                     const content = title.nextElementSibling;
                     const icon = title.querySelector('.plus-minus-icon');
                     const isActive = content.classList.contains('active');
-
+                    
                     // Close all others
                     document.querySelectorAll('.schema-option-content.active').forEach(openContent => {
                         if (openContent !== content) {
@@ -1138,7 +930,7 @@ function App() {
         function copyCode(button) {
             const codeBlock = button.parentElement;
             const code = codeBlock.querySelector('pre code').innerText;
-
+            
             // Using execCommand for iframe compatibility
             const textarea = document.createElement('textarea');
             textarea.value = code;
@@ -1159,5 +951,4 @@ function App() {
         }
     </script>
 </body>
-
 </html>
