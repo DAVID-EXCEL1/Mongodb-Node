@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +22,17 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         .code-block {
             position: relative;
         }
+
         .copy-button {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle white for dark background */
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Subtle white for dark background */
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
@@ -37,35 +41,48 @@
             opacity: 0.7;
             transition: opacity 0.2s, background-color 0.2s;
         }
+
         .code-block:hover .copy-button {
             opacity: 1;
             background-color: rgba(255, 255, 255, 0.2);
         }
+
         .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.1); /* Lighter background for active */
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Lighter background for active */
             color: white;
             font-weight: 600;
         }
+
         .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.05); /* Even lighter hover */
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Even lighter hover */
         }
+
         .crud-tab {
             padding: 0.75rem 1rem;
             border-bottom-width: 2px;
             border-color: transparent;
             font-weight: 500;
-            color: #6B7280; /* gray-500 */
+            color: #6B7280;
+            /* gray-500 */
             transition: all 0.2s;
         }
+
         .crud-tab:hover {
-            color: #1F2937; /* gray-900 */
-            border-color: #E5E7EB; /* gray-200 */
+            color: #1F2937;
+            /* gray-900 */
+            border-color: #E5E7EB;
+            /* gray-200 */
         }
+
         .crud-tab.active {
-            border-color: #1F2937; /* gray-900 */
+            border-color: #1F2937;
+            /* gray-900 */
             color: #1F2937;
             font-weight: 600;
         }
+
         .schema-option-title {
             cursor: pointer;
             padding: 0.5rem 0;
@@ -73,27 +90,35 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
-            color: #374151; /* gray-700 */
+            color: #374151;
+            /* gray-700 */
             transition: color 0.2s;
         }
+
         .schema-option-title:hover {
-            color: #1F2937; /* gray-900 */
+            color: #1F2937;
+            /* gray-900 */
         }
+
         .schema-option-content {
             display: none;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
         }
+
         .schema-option-content.active {
             display: block;
-            max-height: 500px; /* Adjust as needed */
+            max-height: 500px;
+            /* Adjust as needed */
         }
+
         .plus-minus-icon {
             font-size: 1.2rem;
             line-height: 1;
             transform-origin: center;
         }
+
         .rotate-45 {
             transform: rotate(45deg);
         }
@@ -104,101 +129,154 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000; /* Ensure it stays on top */
-            height: auto; /* Height adapts to content */
-            overflow-x: auto; /* Allow horizontal scrolling for nav links if they overflow */
-            overflow-y: hidden; /* Prevent vertical scrolling */
-            white-space: nowrap; /* Keep nav links on a single line */
-            display: flex; /* Use flexbox for horizontal alignment */
-            align-items: center; /* Vertically align items */
-            padding: 0.5rem 1rem; /* Adjust padding */
-            border-bottom: 1px solid #1F2937; /* Add bottom border */
+            z-index: 1000;
+            /* Ensure it stays on top */
+            height: auto;
+            /* Height adapts to content */
+            overflow-x: auto;
+            /* Allow horizontal scrolling for nav links if they overflow */
+            overflow-y: hidden;
+            /* Prevent vertical scrolling */
+            white-space: nowrap;
+            /* Keep nav links on a single line */
+            display: flex;
+            /* Use flexbox for horizontal alignment */
+            align-items: center;
+            /* Vertically align items */
+            padding: 0.5rem 1rem;
+            /* Adjust padding */
+            border-bottom: 1px solid #1F2937;
+            /* Add bottom border */
         }
 
         .header-nav .nav-list {
             display: flex;
-            flex-direction: row; /* Always horizontal */
+            flex-direction: row;
+            /* Always horizontal */
             align-items: center;
-            gap: 0.5rem; /* Gap between nav items */
-            padding: 0; /* Remove default ul padding */
-            margin: 0; /* Remove default ul margin */
+            gap: 0.5rem;
+            /* Gap between nav items */
+            padding: 0;
+            /* Remove default ul padding */
+            margin: 0;
+            /* Remove default ul margin */
         }
 
         .header-nav .nav-link {
-            padding: 0.5rem 0.75rem; /* Compact padding for horizontal links */
-            font-size: 0.875rem; /* Smaller font size for links */
-            display: flex; /* Ensure icon and text are inline */
+            padding: 0.5rem 0.75rem;
+            /* Compact padding for horizontal links */
+            font-size: 0.875rem;
+            /* Smaller font size for links */
+            display: flex;
+            /* Ensure icon and text are inline */
             align-items: center;
         }
 
         .header-nav .nav-link span {
-            margin-right: 0.5rem; /* Space between icon and text */
-            font-size: 1rem; /* Adjust icon size */
-            display: inline-block; /* Ensure icons are always visible */
+            margin-right: 0.5rem;
+            /* Space between icon and text */
+            font-size: 1rem;
+            /* Adjust icon size */
+            display: inline-block;
+            /* Ensure icons are always visible */
         }
 
         .header-nav h1 {
-            flex-shrink: 0; /* Prevent title from shrinking */
-            margin-right: 1.5rem; /* Space between title and search/nav */
-            margin-bottom: 0; /* Remove bottom margin */
+            flex-shrink: 0;
+            /* Prevent title from shrinking */
+            margin-right: 1.5rem;
+            /* Space between title and search/nav */
+            margin-bottom: 0;
+            /* Remove bottom margin */
         }
 
         .header-nav .search-input-container {
-            flex-grow: 1; /* Allow search input to take available space */
-            max-width: 200px; /* Limit search input width */
-            margin-right: 1rem; /* Space after search input */
+            flex-grow: 1;
+            /* Allow search input to take available space */
+            max-width: 200px;
+            /* Limit search input width */
+            margin-right: 1rem;
+            /* Space after search input */
         }
-        
+
         /* Adjust main content padding to account for fixed header */
         .main-content-padding {
-            padding-top: 5rem; /* Adjust this value based on your header's actual height */
+            padding-top: 5rem;
+            /* Adjust this value based on your header's actual height */
         }
 
         /* Responsive adjustments for header on smaller screens */
         @media (max-width: 767px) {
             .header-nav {
-                flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-                justify-content: center; /* Center items when wrapped */
-                padding: 0.75rem 0.5rem; /* More vertical padding for wrapped content */
+                flex-wrap: wrap;
+                /* Allow items to wrap on smaller screens */
+                justify-content: center;
+                /* Center items when wrapped */
+                padding: 0.75rem 0.5rem;
+                /* More vertical padding for wrapped content */
             }
+
             .header-nav h1 {
-                width: 100%; /* Title takes full width */
+                width: 100%;
+                /* Title takes full width */
                 text-align: center;
-                margin-bottom: 0.5rem; /* Add some space below title */
-                margin-right: 0; /* Remove right margin */
+                margin-bottom: 0.5rem;
+                /* Add some space below title */
+                margin-right: 0;
+                /* Remove right margin */
             }
+
             .header-nav .search-input-container {
-                width: 100%; /* Search input takes full width */
-                max-width: none; /* Remove max-width constraint */
-                margin-bottom: 0.5rem; /* Add space below search */
-                margin-right: 0; /* Remove right margin */
+                width: 100%;
+                /* Search input takes full width */
+                max-width: none;
+                /* Remove max-width constraint */
+                margin-bottom: 0.5rem;
+                /* Add space below search */
+                margin-right: 0;
+                /* Remove right margin */
             }
+
             .header-nav .nav-list {
-                width: 100%; /* Nav list takes full width */
-                justify-content: center; /* Center nav items */
-                overflow-x: auto; /* Ensure horizontal scrolling for nav links */
-                padding-bottom: 0.5rem; /* Add padding for scrollbar */
+                width: 100%;
+                /* Nav list takes full width */
+                justify-content: center;
+                /* Center nav items */
+                overflow-x: auto;
+                /* Ensure horizontal scrolling for nav links */
+                padding-bottom: 0.5rem;
+                /* Add padding for scrollbar */
             }
+
             .header-nav .nav-link {
-                padding: 0.4rem 0.6rem; /* Even smaller padding for very small screens */
-                font-size: 0.8rem; /* Even smaller font size */
+                padding: 0.4rem 0.6rem;
+                /* Even smaller padding for very small screens */
+                font-size: 0.8rem;
+                /* Even smaller font size */
             }
+
             .header-nav .nav-link span {
-                margin-right: 0.25rem; /* Reduce icon margin */
+                margin-right: 0.25rem;
+                /* Reduce icon margin */
             }
+
             .main-content-padding {
-                padding-top: 8rem; /* Increase padding for smaller screens if header wraps */
+                padding-top: 8rem;
+                /* Increase padding for smaller screens if header wraps */
             }
         }
 
         @media (min-width: 768px) {
             .header-nav {
-                flex-wrap: nowrap; /* Prevent wrapping on larger screens */
-                justify-content: flex-start; /* Align items to start */
+                flex-wrap: nowrap;
+                /* Prevent wrapping on larger screens */
+                justify-content: flex-start;
+                /* Align items to start */
             }
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Header Navigation -->
@@ -206,52 +284,71 @@
         <h1 class="text-2xl font-bold text-white">
             <span class="text-blue-400">MERN</span> Stack Guide
         </h1>
-        
+
         <div class="search-input-container">
-            <input type="text" placeholder="Search guide..." class="w-full p-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-blue-500 placeholder-gray-500">
+            <input type="text" placeholder="Search guide..."
+                class="w-full p-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-blue-500 placeholder-gray-500">
         </div>
 
         <ul class="nav-list">
-            <li><a href="#overview" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700 active" data-target="overview">
-                <span>&#128218;</span> Overview
-            </a></li>
-            <li><a href="#setup" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="setup">
-                <span>&#128187;</span> Setup
-            </a></li>
-            <li><a href="#connection" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="connection">
-                <span>&#128279;</span> Backend
-            </a></li>
-            <li><a href="#schema" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="schema">
-                <span>&#128203;</span> Schema
-            </a></li>
-            <li><a href="#crud" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="crud">
-                <span>&#128196;</span> CRUD
-            </a></li>
-            <li><a href="#react-frontend" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="react-frontend">
-                <span>&#128187;</span> React
-            </a></li>
-            <li><a href="#run" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="run">
-                <span>&#128640;</span> Test
-            </a></li>
-            <li><a href="#best-practices" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700" data-target="best-practices">
-                <span>&#128200;</span> Best Practices
-            </a></li>
+            <li><a href="#overview" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700 active"
+                    data-target="overview">
+                    <span>&#128218;</span> Overview
+                </a></li>
+            <li><a href="#setup" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="setup">
+                    <span>&#128187;</span> Setup
+                </a></li>
+            <li><a href="#connection" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="connection">
+                    <span>&#128279;</span> Backend
+                </a></li>
+            <li><a href="#schema" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="schema">
+                    <span>&#128203;</span> Schema
+                </a></li>
+            <li><a href="#crud" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="crud">
+                    <span>&#128196;</span> CRUD
+                </a></li>
+            <li><a href="#react-frontend" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="react-frontend">
+                    <span>&#128187;</span> React
+                </a></li>
+            <li><a href="#run" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="run">
+                    <span>&#128640;</span> Test
+                </a></li>
+            <li><a href="#best-practices" class="nav-link rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                    data-target="best-practices">
+                    <span>&#128200;</span> Best Practices
+                </a></li>
         </ul>
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6 md:p-10 space-y-12 bg-white main-content-padding">
+    <main class="flex-1 p-6 pt-26 md:p-10 space-y-12 bg-white main-content-padding">
         <div id="overview" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">Overview & Prerequisites</h2>
-            <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for building a **MERN stack** application, combining **MongoDB** (database), **Express.js** (backend framework), **React** (frontend library), and **Node.js** (runtime environment). You'll learn how to set up your project, define data models, perform CRUD operations, and build an interactive React frontend that communicates with your backend. This section outlines the tools you'll need to follow along.</p>
+            <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for building a **MERN
+                stack** application, combining **MongoDB** (database), **Express.js** (backend framework), **React**
+                (frontend library), and **Node.js** (runtime environment). You'll learn how to set up your project,
+                define data models, perform CRUD operations, and build an interactive React frontend that communicates
+                with your backend. This section outlines the tools you'll need to follow along.</p>
             <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                 <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
                 <ul class="list-disc list-inside space-y-2 text-gray-700">
-                    <li><b>Node.js and npm:</b> Required for running the application and managing packages. Download from <a href="https://nodejs.org/" target="_blank" class="text-blue-600 hover:underline">nodejs.org</a>.</li>
+                    <li><b>Node.js and npm:</b> Required for running the application and managing packages. Download
+                        from <a href="https://nodejs.org/" target="_blank"
+                            class="text-blue-600 hover:underline">nodejs.org</a>.</li>
                     <li><b>MongoDB:</b> Your database. You can run it locally or use a cloud service.
                         <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
-                            <li><b>Local:</b> Install MongoDB Community Server from <a href="https://www.mongodb.com/try/download/community" target="_blank" class="text-blue-600 hover:underline">mongodb.com</a>.</li>
-                            <li><b>Cloud (Recommended):</b> Set up a free cluster on <a href="https://www.mongodb.com/cloud/atlas" target="_blank" class="text-blue-600 hover:underline">MongoDB Atlas</a>.</li>
+                            <li><b>Local:</b> Install MongoDB Community Server from <a
+                                    href="https://www.mongodb.com/try/download/community" target="_blank"
+                                    class="text-blue-600 hover:underline">mongodb.com</a>.</li>
+                            <li><b>Cloud (Recommended):</b> Set up a free cluster on <a
+                                    href="https://www.mongodb.com/cloud/atlas" target="_blank"
+                                    class="text-blue-600 hover:underline">MongoDB Atlas</a>.</li>
                         </ul>
                     </li>
                     <li><b>Text Editor:</b> A code editor like VS Code is recommended.</li>
@@ -261,12 +358,15 @@
 
         <div id="setup" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">Initial Setup</h2>
-            <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your Node.js project, installing the necessary libraries, and configuring your environment to securely connect to your database. Follow these steps to build the foundation of your backend application.</p>
-            
+            <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your
+                Node.js project, installing the necessary libraries, and configuring your environment to securely
+                connect to your database. Follow these steps to build the foundation of your backend application.</p>
+
             <div class="space-y-8">
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Set up your Node.js Project</h3>
-                    <p class="mb-4 text-gray-700">Create a new directory for your project and initialize it with npm.</p>
+                    <p class="mb-4 text-gray-700">Create a new directory for your project and initialize it with npm.
+                    </p>
                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-bash">mkdir my-mern-app
@@ -274,11 +374,13 @@ cd my-mern-app
 npm init -y</code></pre>
                     </div>
                 </div>
-                
+
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Backend Packages</h3>
-                    <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction, Dotenv for environment variables, and `cors` for handling cross-origin requests from your React frontend.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction,
+                        Dotenv for environment variables, and `cors` for handling cross-origin requests from your React
+                        frontend.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-bash">npm install express mongoose dotenv cors</code></pre>
                     </div>
@@ -286,8 +388,10 @@ npm init -y</code></pre>
 
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">3. Create a `.env` file</h3>
-                    <p class="mb-4 text-gray-700">Create a `.env` file in your project's root directory. This file will store your database connection string, keeping it separate from your code. Remember to replace the placeholder with your actual connection string from MongoDB Atlas.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Create a `.env` file in your project's root directory. This file will
+                        store your database connection string, keeping it separate from your code. Remember to replace
+                        the placeholder with your actual connection string from MongoDB Atlas.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-bash">MONGO_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.abcde.mongodb.net/myDatabase?retryWrites=true&w=majority</code></pre>
                     </div>
@@ -297,8 +401,11 @@ npm init -y</code></pre>
 
         <div id="connection" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">Backend Connection (Node.js & Express)</h2>
-             <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to MongoDB using Mongoose. This snippet sets up a basic Express server, establishes the database connection using the URI from your `.env` file, and includes the `cors` middleware, which is crucial for allowing your React frontend to make requests to this backend.</p>
-             <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+            <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to
+                MongoDB using Mongoose. This snippet sets up a basic Express server, establishes the database connection
+                using the URI from your `.env` file, and includes the `cors` middleware, which is crucial for allowing
+                your React frontend to make requests to this backend.</p>
+            <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                 <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 <pre><code class="language-javascript">// server.js
 
@@ -350,7 +457,10 @@ app.listen(PORT, () => {
 
         <div id="schema" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">Schema & Models</h2>
-            <p class="mb-6 text-lg text-gray-700">A Mongoose Schema defines the structure of your documents within a MongoDB collection. This is where you enforce data types, validation, and default values. Below is an example of a `User` schema. You can explore the different options available to customize your data model by clicking on them.</p>
+            <p class="mb-6 text-lg text-gray-700">A Mongoose Schema defines the structure of your documents within a
+                MongoDB collection. This is where you enforce data types, validation, and default values. Below is an
+                example of a `User` schema. You can explore the different options available to customize your data model
+                by clicking on them.</p>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Example: `User.js`</h3>
@@ -406,8 +516,10 @@ module.exports = User;</code></pre>
 
         <div id="crud" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations (Backend)</h2>
-            <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create, Read, Update, and Delete (CRUD) operations. This section provides the Express.js code for a basic API to manage users. Use the tabs to switch between different operations.</p>
-            
+            <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create, Read,
+                Update, and Delete (CRUD) operations. This section provides the Express.js code for a basic API to
+                manage users. Use the tabs to switch between different operations.</p>
+
             <div class="border-b border-gray-200 mb-4">
                 <nav class="flex space-x-2 sm:space-x-4" id="crud-tabs">
                     <button class="crud-tab whitespace-nowrap active" data-target="crud-create">CREATE</button>
@@ -419,8 +531,9 @@ module.exports = User;</code></pre>
 
             <div id="crud-content" class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                 <div id="crud-create" class="crud-content-panel active">
-                     <p class="mb-4 text-gray-700">Create a new user by sending a POST request to `/users` with the user data in the request body.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Create a new user by sending a POST request to `/users` with the user
+                        data in the request body.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-javascript">// 1. Create a new user (POST /users)
 app.post('/users', async (req, res) => {
@@ -435,8 +548,9 @@ app.post('/users', async (req, res) => {
                     </div>
                 </div>
                 <div id="crud-read" class="crud-content-panel" style="display:none;">
-                     <p class="mb-4 text-gray-700">Read users from the database. You can either fetch all users with a GET request to `/users` or a single user by their ID with a GET request to `/users/:id`.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Read users from the database. You can either fetch all users with a
+                        GET request to `/users` or a single user by their ID with a GET request to `/users/:id`.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-javascript">// 2. Get all users (GET /users)
 app.get('/users', async (req, res) => {
@@ -463,8 +577,9 @@ app.get('/users/:id', async (req, res) => {
                     </div>
                 </div>
                 <div id="crud-update" class="crud-content-panel" style="display:none;">
-                     <p class="mb-4 text-gray-700">Update an existing user by sending a PUT request to `/users/:id` with the updated data in the request body.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Update an existing user by sending a PUT request to `/users/:id` with
+                        the updated data in the request body.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-javascript">// 4. Update a user by ID (PUT /users/:id)
 app.put('/users/:id', async (req, res) => {
@@ -485,8 +600,8 @@ app.put('/users/:id', async (req, res) => {
                     </div>
                 </div>
                 <div id="crud-delete" class="crud-content-panel" style="display:none;">
-                     <p class="mb-4 text-gray-700">Delete a user by sending a DELETE request to `/users/:id`.</p>
-                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <p class="mb-4 text-gray-700">Delete a user by sending a DELETE request to `/users/:id`.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-javascript">// 5. Delete a user by ID (DELETE /users/:id)
 app.delete('/users/:id', async (req, res) => {
@@ -507,12 +622,18 @@ app.delete('/users/:id', async (req, res) => {
 
         <div id="react-frontend" class="content-section">
             <h2 class="text-3xl font-bold mb-4 text-gray-900">React Frontend</h2>
-            <p class="mb-6 text-lg text-gray-700">React will serve as your frontend library, providing a component-based approach to building dynamic user interfaces. Below is a basic React component that demonstrates how to create a user and fetch a list of users from your Node.js backend. This section also includes a live interactive demo.</p>
+            <p class="mb-6 text-lg text-gray-700">React will serve as your frontend library, providing a component-based
+                approach to building dynamic user interfaces. Below is a basic React component that demonstrates how to
+                create a user and fetch a list of users from your Node.js backend. This section also includes a live
+                interactive demo.</p>
 
             <div class="space-y-8">
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">React `App` Component (`App.js` conceptual)</h3>
-                    <p class="mb-4 text-gray-700">This code defines a simple React component that allows you to create a new user and displays a list of existing users fetched from your backend. Pay attention to the `fetch` calls for interacting with your Node.js API.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">React `App` Component (`App.js` conceptual)
+                    </h3>
+                    <p class="mb-4 text-gray-700">This code defines a simple React component that allows you to create a
+                        new user and displays a list of existing users fetched from your backend. Pay attention to the
+                        `fetch` calls for interacting with your Node.js API.</p>
                     <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                         <button class="copy-button" onclick="copyCode(this)">Copy</button>
                         <pre><code class="language-jsx">
@@ -635,78 +756,97 @@ function App() {
             {responseMessage && (
                 <div className={`p-3 rounded-md text-sm ${responseMessage.startsWith('Error') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
                     <pre>{responseMessage}</pre>
-                </div>
-            )}
+                    </div>
+                    )}
 
-            <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
-            {loading && <p>Loading users...</p>}
-            {!loading && users.length === 0 && <p>No users found. Create one above! دستیاب نہیں ہے!</p>}
-            {!loading && users.length > 0 && (
-                <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-                    {users.map(user => (
+                    <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
+                    {loading && <p>Loading users...</p>}
+                    {!loading && users.length === 0 && <p>No users found. Create one above! دستیاب نہیں ہے!</p>}
+                    {!loading && users.length > 0 && (
+                    <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                        {users.map(user => (
                         <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
-                            <b>Name:</b> {user.name} <br/>
-                            <b>Email:</b> {user.email} <br/>
+                            <b>Name:</b> {user.name} <br />
+                            <b>Email:</b> {user.email} <br />
                             <b>Age:</b> {user.age || 'N/A'}
                         </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-}
-                            </code></pre>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Live React Demo</h3>
-                        <p class="mb-4 text-gray-700">This is a live rendering of the React component above. Ensure your Node.js backend is running on `http://localhost:5000` to interact with it.</p>
-                        <div id="react-root" class="p-4 bg-gray-100 rounded-lg shadow-inner border border-gray-300">
-                            <!-- React app will be mounted here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="run" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test (MERN Stack)</h2>
-                <p class="mb-6 text-lg text-gray-700">To test your full MERN stack application, you need to run both your Node.js backend and open this HTML file in your browser. The React frontend within this HTML file will then communicate with your running backend.</p>
-                <div class="space-y-8">
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Node.js Backend</h3>
-                        <p class="mb-4 text-gray-700">Navigate to your `my-mern-app` project directory in the terminal and run your `server.js` file. This will start your Express server on `http://localhost:5000`.</p>
-                        <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
-                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre><code class="language-bash">node server.js</code></pre>
-                        </div>
-                        <p class="mt-4 text-gray-700"><strong class="text-red-500 font-bold">It is critical to keep this terminal window open and running while you interact with the frontend!</strong></p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Open the React Frontend</h3>
-                        <p class="mb-4 text-gray-700">Simply open this HTML file (`index.html` if you saved it) directly in your web browser. The embedded React application will automatically load and attempt to connect to your running Node.js backend. Use the "Live React Demo" section above to interact with your backend.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="best-practices" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
-                <p class="mb-6 text-lg text-gray-700">Building a robust MERN stack application goes beyond the basics. This final section highlights key practices you should adopt for creating secure, scalable, and maintainable applications.</p>
-                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <ul class="list-disc list-inside space-y-3 text-gray-700">
-                        <li><b>Error Handling:</b> Implement more robust error handling for production applications, both in backend (Express) and frontend (React).</li>
-                        <li><b>Input Validation:</b> Use validation libraries (e.g., `Joi` on backend, form validation in React) for comprehensive input validation.</li>
-                        <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain text</b>. Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
-                        <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication (e.g., JWT) and authorization mechanisms across both frontend and backend.</li>
-                        <li><b>Project Structure:</b> For larger applications, organize your code into separate folders for backend (e.g., `server/`) and frontend (e.g., `client/` or `frontend/`), typically using tools like Create React App or Vite for the frontend.</li>
-                        <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to improve database performance (e.g., `email: { type: String, unique: true, index: true }`).</li>
-                        <li><b>Environment Variables:</b> Always use environment variables for sensitive data like database connection strings.</li>
-                        <li><b>CORS Policies:</b> For production, configure CORS more restrictively, allowing requests only from your specific frontend domain(s).</li>
+                        ))}
                     </ul>
+                    )}
+                </div>
+                );
+                }
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Live React Demo</h3>
+            <p class="mb-4 text-gray-700">This is a live rendering of the React component above. Ensure your Node.js
+                backend is running on `http://localhost:5000` to interact with it.</p>
+            <div id="react-root" class="p-4 bg-gray-100 rounded-lg shadow-inner border border-gray-300">
+                <!-- React app will be mounted here -->
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div id="run" class="content-section">
+            <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test (MERN Stack)</h2>
+            <p class="mb-6 text-lg text-gray-700">To test your full MERN stack application, you need to run both your
+                Node.js backend and open this HTML file in your browser. The React frontend within this HTML file will
+                then communicate with your running backend.</p>
+            <div class="space-y-8">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Node.js Backend</h3>
+                    <p class="mb-4 text-gray-700">Navigate to your `my-mern-app` project directory in the terminal and
+                        run your `server.js` file. This will start your Express server on `http://localhost:5000`.</p>
+                    <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre><code class="language-bash">node server.js</code></pre>
+                    </div>
+                    <p class="mt-4 text-gray-700"><strong class="text-red-500 font-bold">It is critical to keep this
+                            terminal window open and running while you interact with the frontend!</strong></p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Open the React Frontend</h3>
+                    <p class="mb-4 text-gray-700">Simply open this HTML file (`index.html` if you saved it) directly in
+                        your web browser. The embedded React application will automatically load and attempt to connect
+                        to your running Node.js backend. Use the "Live React Demo" section above to interact with your
+                        backend.</p>
                 </div>
             </div>
+        </div>
 
-        </main>
+        <div id="best-practices" class="content-section">
+            <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
+            <p class="mb-6 text-lg text-gray-700">Building a robust MERN stack application goes beyond the basics. This
+                final section highlights key practices you should adopt for creating secure, scalable, and maintainable
+                applications.</p>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                <ul class="list-disc list-inside space-y-3 text-gray-700">
+                    <li><b>Error Handling:</b> Implement more robust error handling for production applications, both in
+                        backend (Express) and frontend (React).</li>
+                    <li><b>Input Validation:</b> Use validation libraries (e.g., `Joi` on backend, form validation in
+                        React) for comprehensive input validation.</li>
+                    <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain text</b>.
+                        Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
+                    <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication
+                        (e.g., JWT) and authorization mechanisms across both frontend and backend.</li>
+                    <li><b>Project Structure:</b> For larger applications, organize your code into separate folders for
+                        backend (e.g., `server/`) and frontend (e.g., `client/` or `frontend/`), typically using tools
+                        like Create React App or Vite for the frontend.</li>
+                    <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to improve
+                        database performance (e.g., `email: { type: String, unique: true, index: true }`).</li>
+                    <li><b>Environment Variables:</b> Always use environment variables for sensitive data like database
+                        connection strings.</li>
+                    <li><b>CORS Policies:</b> For production, configure CORS more restrictively, allowing requests only
+                        from your specific frontend domain(s).</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
     </div>
 
     <script type="text/babel">
@@ -839,8 +979,8 @@ function App() {
                         <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
                             {users.map(user => (
                                 <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
-                                    <b>Name:</b> {user.name} <br/>
-                                    <b>Email:</b> {user.email} <br/>
+                                    <b>Name:</b> {user.name} <br />
+                                    <b>Email:</b> {user.email} <br />
                                     <b>Age:</b> {user.age || 'N/A'}
                                 </li>
                             ))}
@@ -862,7 +1002,7 @@ function App() {
         document.addEventListener('DOMContentLoaded', function () {
             const navLinks = document.querySelectorAll('.nav-link');
             const contentSections = document.querySelectorAll('.content-section');
-            
+
             // Function to update active link
             function updateActiveNavLink() {
                 let currentActiveSectionId = '';
@@ -915,7 +1055,7 @@ function App() {
                     link.classList.add('active');
                 });
             });
-            
+
             const crudTabs = document.querySelectorAll('.crud-tab');
             const crudPanels = document.querySelectorAll('.crud-content-panel');
 
@@ -923,10 +1063,10 @@ function App() {
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = tab.getAttribute('data-target');
-                    
+
                     crudTabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    
+
                     crudPanels.forEach(panel => {
                         panel.style.display = panel.id === targetId ? 'block' : 'none';
                     });
@@ -965,13 +1105,13 @@ function App() {
                 `;
                 optionsContainer.appendChild(optionDiv);
             });
-            
+
             document.querySelectorAll('.schema-option-title').forEach(title => {
                 title.addEventListener('click', () => {
                     const content = title.nextElementSibling;
                     const icon = title.querySelector('.plus-minus-icon');
                     const isActive = content.classList.contains('active');
-                    
+
                     // Close all others
                     document.querySelectorAll('.schema-option-content.active').forEach(openContent => {
                         if (openContent !== content) {
@@ -998,7 +1138,7 @@ function App() {
         function copyCode(button) {
             const codeBlock = button.parentElement;
             const code = codeBlock.querySelector('pre code').innerText;
-            
+
             // Using execCommand for iframe compatibility
             const textarea = document.createElement('textarea');
             textarea.value = code;
@@ -1019,4 +1159,5 @@ function App() {
         }
     </script>
 </body>
+
 </html>
