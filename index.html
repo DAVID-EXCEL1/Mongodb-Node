@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Guide: Node.js & MongoDB</title>
+    <title>Interactive Guide: MERN Stack (MongoDB, Express, React, Node.js)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 
-        Chosen Palette: Warm Neutrals with Dark Accents (inspired by femi-ts-note.vercel.app)
-        Application Structure Plan: The application now features a distinct, fixed sidebar for navigation on the left and a scrollable main content area on the right, mirroring the structure of the reference website. This design prioritizes content readability and quick access to different sections via the sidebar's smooth scroll-to-anchor functionality. This structure is highly effective for technical documentation, allowing users to easily browse topics or dive deep into specific sections. Key interactive elements like tabbed CRUD operations and expandable schema options are retained and styled to integrate seamlessly with the new aesthetic, enhancing usability and content exploration. A search bar is added to the sidebar for visual consistency, though its functionality is limited to UI resemblance in this iteration.
-        Visualization & Content Choices: The source material is a technical guide. Goal: Organize Content -> Viz: Fixed Sidebar Navigation (scroll-to-anchor) + Search Input -> Interaction: Click to scroll to content sections, visual search bar, and now, automatic highlighting of active section on scroll -> Justification: Provides persistent navigation and a familiar UI pattern for content discovery, enhancing user orientation within the long-form content. Goal: Explain CRUD -> Viz: Tabbed component -> Interaction: Click to switch between Create/Read/Update/Delete code -> Justification: Efficiently presents related code snippets without overwhelming the user. Goal: Detail Schema Options -> Viz: Interactive, collapsible list -> Interaction: Click to expand/collapse details -> Justification: Allows users to explore details on demand, keeping the main view clean. Goal: Make Code Usable -> Viz: "Copy" button on code blocks -> Interaction: Click to copy to clipboard -> Justification: Improves developer workflow by making code snippets easily transferable. No charts are used as the content is purely instructional and textual.
-        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
-    -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -127,7 +126,7 @@
         <nav
             class="w-full md:w-64 bg-gray-900 text-gray-200 p-4 md:p-6 flex-shrink-0 sticky top-0 h-screen overflow-y-auto border-r border-gray-800">
             <h1 class="text-2xl font-bold text-white mb-6">
-                <span class="text-blue-400">Mongo</span><span class="text-orange-400">Node</span> Guide
+                <span class="text-blue-400">MERN</span> Stack Guide
             </h1>
 
             <div class="mb-6">
@@ -149,7 +148,7 @@
                 <li><a href="#connection"
                         class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
                         data-target="connection">
-                        <span class="mr-3 text-lg">&#128279;</span> Database Connection
+                        <span class="mr-3 text-lg">&#128279;</span> Backend Connection
                     </a></li>
                 <li><a href="#schema"
                         class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
@@ -160,6 +159,11 @@
                         class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
                         data-target="crud">
                         <span class="mr-3 text-lg">&#128196;</span> CRUD Operations
+                    </a></li>
+                <li><a href="#react-frontend"
+                        class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
+                        data-target="react-frontend">
+                        <span class="mr-3 text-lg">&#128187;</span> React Frontend
                     </a></li>
                 <li><a href="#run"
                         class="nav-link flex items-center p-3 rounded-lg transition-colors duration-200 hover:bg-gray-700"
@@ -178,10 +182,11 @@
         <main class="flex-1 p-6 md:p-10 space-y-12 bg-white">
             <div id="overview" class="content-section">
                 <h2 class="text-3xl font-bold mb-4 text-gray-900">Overview & Prerequisites</h2>
-                <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for connecting a
-                    MongoDB database to a Node.js application using Mongoose. Here, you'll find everything you need to
-                    get started, from initial setup to defining data structures and interacting with your database. This
-                    section outlines the tools you'll need to follow along.</p>
+                <p class="mb-6 text-lg text-gray-700">This guide provides a comprehensive walkthrough for building a
+                    **MERN stack** application, combining **MongoDB** (database), **Express.js** (backend framework),
+                    **React** (frontend library), and **Node.js** (runtime environment). You'll learn how to set up your
+                    project, define data models, perform CRUD operations, and build an interactive React frontend that
+                    communicates with your backend. This section outlines the tools you'll need to follow along.</p>
                 <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
                     <ul class="list-disc list-inside space-y-2 text-gray-700">
@@ -199,8 +204,6 @@
                             </ul>
                         </li>
                         <li><b>Text Editor:</b> A code editor like VS Code is recommended.</li>
-                        <li><b>API Testing Tool:</b> Optional but helpful for testing your endpoints (e.g., Postman,
-                            Insomnia).</li>
                     </ul>
                 </div>
             </div>
@@ -209,7 +212,8 @@
                 <h2 class="text-3xl font-bold mb-4 text-gray-900">Initial Setup</h2>
                 <p class="mb-6 text-lg text-gray-700">This section walks you through the initial steps of creating your
                     Node.js project, installing the necessary libraries, and configuring your environment to securely
-                    connect to your database. Follow these steps to build the foundation of your application.</p>
+                    connect to your database. Follow these steps to build the foundation of your backend application.
+                </p>
 
                 <div class="space-y-8">
                     <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
@@ -218,19 +222,20 @@
                             npm.</p>
                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre><code class="language-bash">mkdir my-mongodb-app
-cd my-mongodb-app
+                            <pre><code class="language-bash">mkdir my-mern-app
+cd my-mern-app
 npm init -y</code></pre>
                         </div>
                     </div>
 
                     <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Required Packages</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Install Backend Packages</h3>
                         <p class="mb-4 text-gray-700">Install Express for the server, Mongoose for MongoDB interaction,
-                            and Dotenv for managing environment variables.</p>
+                            Dotenv for environment variables, and `cors` for handling cross-origin requests from your
+                            React frontend.</p>
                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre><code class="language-bash">npm install express mongoose dotenv</code></pre>
+                            <pre><code class="language-bash">npm install express mongoose dotenv cors</code></pre>
                         </div>
                     </div>
 
@@ -248,23 +253,29 @@ npm init -y</code></pre>
             </div>
 
             <div id="connection" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">Database Connection</h2>
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Backend Connection (Node.js & Express)</h2>
                 <p class="mb-6 text-lg text-gray-700">Here is the core code for connecting your Node.js application to
-                    MongoDB using Mongoose. This snippet sets up a basic Express server and establishes the database
-                    connection using the URI from your `.env` file.</p>
+                    MongoDB using Mongoose. This snippet sets up a basic Express server, establishes the database
+                    connection using the URI from your `.env` file, and includes the `cors` middleware, which is crucial
+                    for allowing your React frontend to make requests to this backend.</p>
                 <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                     <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                    <pre><code class="language-javascript">// server.js
+                    <pre><code class="language-javascript">
 
 require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Import cors middleware
+const User = require('./models/User'); // Assuming User model is defined
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware to parse JSON bodies (added for CRUD)
+// Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable CORS for all origins (for development)
+app.use(cors()); 
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -277,7 +288,18 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Basic route
 app.get('/', (req, res) => {
-    res.send('Welcome to the MongoDB Node.js App!');
+    res.send('Welcome to the MERN Stack Backend!');
+});
+
+// Example route for creating a user (for testing with the form)
+app.post('/users', async (req, res) => {
+    try {
+        const newUser = new User(req.body);
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
 
 app.listen(PORT, () => {
@@ -346,10 +368,10 @@ module.exports = User;</code></pre>
             </div>
 
             <div id="crud" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations</h2>
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">CRUD Operations (Backend)</h2>
                 <p class="mb-6 text-lg text-gray-700">Once your model is defined, you can use it to perform Create,
-                    Read, Update, and Delete (CRUD) operations. This section provides the code for a basic API to manage
-                    users. Use the tabs to switch between different operations.</p>
+                    Read, Update, and Delete (CRUD) operations. This section provides the Express.js code for a basic
+                    API to manage users. Use the tabs to switch between different operations.</p>
 
                 <div class="border-b border-gray-200 mb-4">
                     <nav class="flex space-x-2 sm:space-x-4" id="crud-tabs">
@@ -452,73 +474,383 @@ app.delete('/users/:id', async (req, res) => {
                 </div>
             </div>
 
-            <div id="run" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test</h2>
-                <p class="mb-6 text-lg text-gray-700">With everything set up, you can now run your application and test
-                    the API endpoints. This section shows you how to start the server and provides example requests you
-                    can make using a tool like Postman or Insomnia.</p>
+            <div id="react-frontend" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">React Frontend</h2>
+                <p class="mb-6 text-lg text-gray-700">React will serve as your frontend library, providing a
+                    component-based approach to building dynamic user interfaces. Below is a basic React component that
+                    demonstrates how to create a user and fetch a list of users from your Node.js backend. This section
+                    also includes a live interactive demo.</p>
+
                 <div class="space-y-8">
                     <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Application</h3>
-                        <p class="mb-4 text-gray-700">Navigate to your project directory in the terminal and run your
-                            server. You should see console messages indicating a successful connection.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">React `App` Component (`App.js` conceptual)
+                        </h3>
+                        <p class="mb-4 text-gray-700">This code defines a simple React component that allows you to
+                            create a new user and displays a list of existing users fetched from your backend. Pay
+                            attention to the `fetch` calls for interacting with your Node.js API.</p>
                         <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
                             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                            <pre><code class="language-bash">node server.js</code></pre>
+                            <pre><code class="language-jsx">
+// This code would typically be in a file like src/App.js in a React project.
+// For this single HTML file, it's embedded and transpiled by Babel.
+
+function App() {
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [age, setAge] = React.useState('');
+    const [responseMessage, setResponseMessage] = React.useState('');
+    const [users, setUsers] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
+
+    const API_BASE_URL = 'http://localhost:5000'; // Your Node.js backend URL
+
+    const fetchUsers = async () => {
+        setLoading(true);
+        try {
+            const res = await fetch(`${API_BASE_URL}/users`);
+            const data = await res.json();
+            setUsers(data);
+        } catch (error) {
+            console.error('Failed to fetch users:', error);
+            // Updated error message for clarity
+            setResponseMessage('Error: Could not connect to backend. Please ensure your Node.js server is running at ' + API_BASE_URL + ' in a separate terminal.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    React.useEffect(() => {
+        fetchUsers(); // Fetch users on component mount
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setResponseMessage('');
+
+        const userData = { name, email };
+        if (age) {
+            userData.age = parseInt(age, 10);
+        }
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setResponseMessage('User created successfully: ' + JSON.stringify(data, null, 2));
+                setName('');
+                setEmail('');
+                setAge('');
+                fetchUsers(); // Refresh user list
+            } else {
+                setResponseMessage('Error: ' + (data.message || JSON.stringify(data, null, 2)));
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            // Updated error message for clarity
+            setResponseMessage('Submission failed. Check if your Node.js server is running at ' + API_BASE_URL + ' and try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-gray-800">Create New User (React Form)</h3>
+            <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                <div>
+                    <label htmlFor="reactName" className="block text-sm font-medium text-gray-700">Name</label>
+                    <input
+                        type="text"
+                        id="reactName"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="reactEmail" className="block text-sm font-medium text-gray-700">Email</label>
+                    <input
+                        type="email"
+                        id="reactEmail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="reactAge" className="block text-sm font-medium text-gray-700">Age</label>
+                    <input
+                        type="number"
+                        id="reactAge"
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out"
+                    disabled={loading}
+                >
+                    {loading ? 'Creating...' : 'Create User'}
+                </button>
+            </form>
+
+            {responseMessage && (
+                <div className={`p-3 rounded-md text-sm ${responseMessage.startsWith('Error') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                    <pre>{responseMessage}</pre>
                         </div>
+                        )}
+
+                        <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
+                        {loading && <p>Loading users...</p>}
+                        {!loading && users.length === 0 && <p>No users found. Create one above!</p>}
+                        {!loading && users.length > 0 && (
+                        <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                            {users.map(user => (
+                            <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
+                                <b>Name:</b> {user.name} <br />
+                                <b>Email:</b> {user.email} <br />
+                                <b>Age:</b> {user.age || 'N/A'}
+                            </li>
+                            ))}
+                        </ul>
+                        )}
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Test Your API</h3>
-                        <p class="mb-4 text-gray-700">Use an API testing tool to send requests to your server. Here's an
-                            example of how to create a new user:</p>
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-                            <p class="font-mono font-bold text-green-600">POST <span
-                                    class="text-gray-800">http://localhost:5000/users</span></p>
-                            <p class="mt-2 text-sm font-semibold text-gray-800">Headers:</p>
-                            <p class="font-mono text-sm ml-4 text-gray-700">Content-Type: application/json</p>
-                            <p class="mt-2 text-sm font-semibold text-gray-800">Body (raw JSON):</p>
-                            <div class="code-block bg-gray-800 text-white p-4 rounded-lg mt-1">
-                                <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                                <pre><code class="language-json">{
-    "name": "Alice Smith",
-    "email": "alice.smith@example.com",
-    "age": 28
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
+                    );
+                    }
+                    </code></pre>
                 </div>
             </div>
 
-            <div id="best-practices" class="content-section">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
-                <p class="mb-6 text-lg text-gray-700">Building a robust application goes beyond the basics. This final
-                    section highlights key practices you should adopt for creating secure, scalable, and maintainable
-                    applications.</p>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-                    <ul class="list-disc list-inside space-y-3 text-gray-700">
-                        <li><b>Error Handling:</b> Implement more robust error handling for production applications,
-                            possibly using custom middleware.</li>
-                        <li><b>Input Validation:</b> While Mongoose schemas offer basic validation, consider libraries
-                            like `Joi` or `express-validator` for more complex and comprehensive input validation.</li>
-                        <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain
-                                text</b>. Use libraries like `bcrypt.js` to hash passwords before saving them.</li>
-                        <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication
-                            (e.g., JWT) and authorization mechanisms.</li>
-                        <li><b>Project Structure:</b> For larger applications, organize your code into separate folders
-                            for routes, controllers, models, services, etc.</li>
-                        <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to
-                            improve database performance (e.g., `email: { type: String, unique: true, index: true }`).
-                        </li>
-                        <li><b>Environment Variables:</b> Always use environment variables for sensitive data like
-                            database connection strings, especially when deploying your application.</li>
-                    </ul>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">Live React Demo</h3>
+                <p class="mb-4 text-gray-700">This is a live rendering of the React component above. Ensure your Node.js
+                    backend is running on `http://localhost:5000` to interact with it.</p>
+                <div id="react-root" class="p-4 bg-gray-100 rounded-lg shadow-inner border border-gray-300">
+                    <!-- React app will be mounted here -->
                 </div>
             </div>
-
-        </main>
+    </div>
     </div>
 
+    <div id="run" class="content-section">
+        <h2 class="text-3xl font-bold mb-4 text-gray-900">Run & Test (MERN Stack)</h2>
+        <p class="mb-6 text-lg text-gray-700">To test your full MERN stack application, you need to run both your
+            Node.js backend and open this HTML file in your browser. The React frontend within this HTML file will then
+            communicate with your running backend.</p>
+        <div class="space-y-8">
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">1. Run Your Node.js Backend</h3>
+                <p class="mb-4 text-gray-700">Navigate to your `my-mern-app` project directory in the terminal and run
+                    your `server.js` file. This will start your Express server on `http://localhost:5000`.</p>
+                <div class="code-block bg-gray-800 text-white p-4 rounded-lg">
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <pre><code class="language-bash">node server.js</code></pre>
+                </div>
+                <p class="mt-4 text-gray-700">You should see "MongoDB connected successfully!" and "Server running on
+                    port 5000" in your console.</p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">2. Open the React Frontend</h3>
+                <p class="mb-4 text-gray-700">Simply open this HTML file (`index.html` if you saved it) directly in your
+                    web browser. The embedded React application will automatically load and attempt to connect to your
+                    running Node.js backend. Use the "Live React Demo" section above to interact with your backend.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="best-practices" class="content-section">
+        <h2 class="text-3xl font-bold mb-4 text-gray-900">Important Considerations & Best Practices</h2>
+        <p class="mb-6 text-lg text-gray-700">Building a robust MERN stack application goes beyond the basics. This
+            final section highlights key practices you should adopt for creating secure, scalable, and maintainable
+            applications.</p>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+            <ul class="list-disc list-inside space-y-3 text-gray-700">
+                <li><b>Error Handling:</b> Implement more robust error handling for production applications, both in
+                    backend (Express) and frontend (React).</li>
+                <li><b>Input Validation:</b> Use validation libraries (e.g., `Joi` on backend, form validation in React)
+                    for comprehensive input validation.</li>
+                <li><b>Password Hashing:</b> For user authentication, <b>never store passwords in plain text</b>. Use
+                    libraries like `bcrypt.js` to hash passwords before saving them.</li>
+                <li><b>Authentication & Authorization:</b> Secure your API endpoints with proper authentication (e.g.,
+                    JWT) and authorization mechanisms across both frontend and backend.</li>
+                <li><b>Project Structure:</b> For larger applications, organize your code into separate folders for
+                    backend (e.g., `server/`) and frontend (e.g., `client/` or `frontend/`), typically using tools like
+                    Create React App or Vite for the frontend.</li>
+                <li><b>Indexes:</b> For fields frequently queried, add indexes to your Mongoose schemas to improve
+                    database performance (e.g., `email: { type: String, unique: true, index: true }`).</li>
+                <li><b>Environment Variables:</b> Always use environment variables for sensitive data like database
+                    connection strings.</li>
+                <li><b>CORS Policies:</b> For production, configure CORS more restrictively, allowing requests only from
+                    your specific frontend domain(s).</li>
+            </ul>
+        </div>
+    </div>
+
+    </main>
+    </div>
+
+    <script type="text/babel">
+        // This code is transpiled by Babel loaded from CDN
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [name, setName] = useState('');
+            const [email, setEmail] = useState('');
+            const [age, setAge] = useState('');
+            const [responseMessage, setResponseMessage] = useState('');
+            const [users, setUsers] = useState([]);
+            const [loading, setLoading] = useState(false);
+
+            const API_BASE_URL = 'http://localhost:5000'; // Your Node.js backend URL
+
+            const fetchUsers = async () => {
+                setLoading(true);
+                try {
+                    const res = await fetch(`${API_BASE_URL}/users`);
+                    const data = await res.json();
+                    setUsers(data);
+                } catch (error) {
+                    console.error('Failed to fetch users:', error);
+                    // Updated error message for clarity
+                    setResponseMessage('Error: Could not connect to backend. Please ensure your Node.js server is running at ' + API_BASE_URL + ' in a separate terminal.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            useEffect(() => {
+                fetchUsers(); // Fetch users on component mount
+            }, []);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                setResponseMessage('');
+
+                const userData = { name, email };
+                if (age) {
+                    userData.age = parseInt(age, 10);
+                }
+
+                try {
+                    const res = await fetch(`${API_BASE_URL}/users`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData),
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        setResponseMessage('User created successfully: ' + JSON.stringify(data, null, 2));
+                        setName('');
+                        setEmail('');
+                        setAge('');
+                        fetchUsers(); // Refresh user list
+                    } else {
+                        setResponseMessage('Error: ' + (data.message || JSON.stringify(data, null, 2)));
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    // Updated error message for clarity
+                    setResponseMessage('Submission failed. Check if your Node.js server is running at ' + API_BASE_URL + ' and try again.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800">Create New User (React Form)</h3>
+                    <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div>
+                            <label htmlFor="reactName" className="block text-sm font-medium text-gray-700">Name</label>
+                            <input
+                                type="text"
+                                id="reactName"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="reactEmail" className="block text-sm font-medium text-gray-700">Email</label>
+                            <input
+                                type="email"
+                                id="reactEmail"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="reactAge" className="block text-sm font-medium text-gray-700">Age</label>
+                            <input
+                                type="number"
+                                id="reactAge"
+                                value={age}
+                                onChange={(e) => setAge(e.target.value)}
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out"
+                            disabled={loading}
+                        >
+                            {loading ? 'Creating...' : 'Create User'}
+                        </button>
+                    </form>
+
+                    {responseMessage && (
+                        <div className={`p-3 rounded-md text-sm ${responseMessage.startsWith('Error') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                            <pre>{responseMessage}</pre>
+                        </div>
+                    )}
+
+                    <h3 className="text-xl font-semibold text-gray-800 mt-8">Existing Users</h3>
+                    {loading && <p>Loading users...</p>}
+                    {!loading && users.length === 0 && <p>No users found. Create one above!</p>}
+                    {!loading && users.length > 0 && (
+                        <ul className="space-y-2 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                            {users.map(user => (
+                                <li key={user._id} className="p-2 border-b border-gray-100 last:border-b-0">
+                                    <b>Name:</b> {user.name} <br />
+                                    <b>Email:</b> {user.email} <br />
+                                    <b>Age:</b> {user.age || 'N/A'}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            );
+        }
+
+        // Mount the React App
+        const reactRootElement = document.getElementById('react-root');
+        if (reactRootElement) {
+            const root = ReactDOM.createRoot(reactRootElement);
+            root.render(<App />);
+        }
+
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const navLinks = document.querySelectorAll('.nav-link');
@@ -527,11 +859,14 @@ app.delete('/users/:id', async (req, res) => {
             // Function to update active link
             function updateActiveNavLink() {
                 let currentActiveSectionId = '';
+                // Adjust this offset based on your header/sticky elements if needed
+                const offset = window.innerHeight / 3;
+
                 for (let i = 0; i < contentSections.length; i++) {
                     const section = contentSections[i];
                     const rect = section.getBoundingClientRect();
                     // Check if the top of the section is within the viewport, with a small offset
-                    if (rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3) {
+                    if (rect.top <= offset && rect.bottom >= offset) {
                         currentActiveSectionId = section.id;
                         break;
                     }
