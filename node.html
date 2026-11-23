@@ -129,53 +129,69 @@
     <div class="min-h-screen">
         <main class="flex-1 p-6 md:p-12 space-y-16">
             <div id="module1" class="content-section scroll-mt-8">
-                <h2 class="text-3xl font-bold mb-6 text-[#FFD700] border-b border-gray-700 pb-2">BACKEND: Forms, MongoDB &amp; MVCR Architecture</h2>
+                <h2 class="text-3xl font-bold mb-6 text-[#FFD700] border-b border-gray-700 pb-2">BACKEND: Forms, MongoDB
+                    &amp; MVCR Architecture</h2>
                 <div class="bg-[#663399] p-6 rounded-xl text-white shadow-lg mb-8">
-                    <p class="font-medium">A practical guide to collecting form data, storing it in MongoDB, hashing passwords, and organizing an Express application with MVCR architecture.</p>
+                    <p class="font-medium">A practical guide to collecting form data, storing it in MongoDB, hashing
+                        passwords, and organizing an Express application with MVCR architecture.</p>
                 </div>
-<p class="text-gray-300 leading-relaxed mb-4">BACKEND</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">1. Introduction</h3>
-<p class="text-gray-300 leading-relaxed mb-4">In web development, users often need to submit information through forms. Examples include creating an account, registering for a course, logging in, and making online purchases.In this lesson, we will learn how to collect information from a user through an HTML form, send the information to an Express.js server, and store it in a MongoDB database.We will use the following technologies:</p>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li>EJS: Used to create dynamic HTML pages.</li>
-<li>Node.js: JavaScript runtime environment.</li>
-<li>Express.js: A Node.js framework used to build web servers and handle requests.</li>
-<li>MongoDB: A NoSQL database used to store information.</li>
-<li>Mongoose: A library that makes interacting with MongoDB easier.</li>
-<li>Bcrypt: Used to hash passwords before storing them.</li>
-</ul>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">2. What is EJS?</h3>
-<p class="text-gray-300 leading-relaxed mb-4">EJS stands for Embedded JavaScript Templates.It is a templating engine that allows us to write JavaScript inside HTML to create dynamic web pages.For example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;h1&gt;Welcome, &lt;%= username %&gt;&lt;/h1&gt;</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">If the username is David, the browser displays:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">Welcome, David</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Common EJS Syntax</h4>
-<p class="text-gray-300 leading-relaxed mb-4">1. Displaying a value</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;%= username %&gt;</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Displays a value and escapes HTML.2. Executing JavaScript without displaying its result</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;% let age = 20; %&gt;</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">3. Displaying raw HTML (use cautiously)</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;%- htmlContent %&gt;</code></pre>
-</div>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">3. What is Express.js?</h3>
-<p class="text-gray-300 leading-relaxed mb-4">Express.js is a lightweight web framework built for Node.js.It helps developers create servers, manage routes, receive requests, and send responses.Example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const express = require(&quot;express&quot;);const app = express();app.get(&quot;/&quot;, (req, res) =&gt; {
+                <p class="text-gray-300 leading-relaxed mb-4">BACKEND</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">1. Introduction</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">In web development, users often need to submit information
+                    through forms. Examples include creating an account, registering for a course, logging in, and
+                    making online purchases.In this lesson, we will learn how to collect information from a user through
+                    an HTML form, send the information to an Express.js server, and store it in a MongoDB database.We
+                    will use the following technologies:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li>EJS: Used to create dynamic HTML pages.</li>
+                    <li>Node.js: JavaScript runtime environment.</li>
+                    <li>Express.js: A Node.js framework used to build web servers and handle requests.</li>
+                    <li>MongoDB: A NoSQL database used to store information.</li>
+                    <li>Mongoose: A library that makes interacting with MongoDB easier.</li>
+                    <li>Bcrypt: Used to hash passwords before storing them.</li>
+                </ul>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">2. What is EJS?</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">EJS stands for Embedded JavaScript Templates.It is a
+                    templating engine that allows us to write JavaScript inside HTML to create dynamic web pages.For
+                    example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;h1&gt;Welcome, &lt;%= username %&gt;&lt;/h1&gt;</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">If the username is David, the browser displays:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">Welcome, David</code></pre>
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Common EJS Syntax</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">1. Displaying a value</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;%= username %&gt;</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Displays a value and escapes HTML.2. Executing JavaScript
+                    without displaying its result</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;% let age = 20; %&gt;</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">3. Displaying raw HTML (use cautiously)</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;%- htmlContent %&gt;</code></pre>
+                </div>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">3. What is Express.js?</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">Express.js is a lightweight web framework built for
+                    Node.js.It helps developers create servers, manage routes, receive requests, and send
+                    responses.Example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const express = require(&quot;express&quot;);const app = express();app.get(&quot;/&quot;, (req, res) =&gt; {
 
 
 
@@ -184,21 +200,24 @@ res.send(&quot;Welcome to our website&quot;);});app.listen(3000, () =&gt; {
 
 
 console.log(&quot;Server is running&quot;);});</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Understanding HTTP Methods</h4>
-<p class="text-gray-300 leading-relaxed mb-4">HTTP methods determine the type of action a client wants to perform.</p>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li>GET: Used to request or retrieve information.</li>
-<li>POST: Used to submit or send information.</li>
-<li>PUT: Used to update information.</li>
-<li>PATCH: Used to partially update information.</li>
-<li>DELETE: Used to remove information.For our registration system, we will use GET to display the signup form and POST to submit the registration information.</li>
-</ul>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">4. Understanding HTML Forms</h3>
-<p class="text-gray-300 leading-relaxed mb-4">An HTML form is used to collect information from users.Example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;form action=&quot;/signup&quot; method=&quot;POST&quot;&gt;
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Understanding HTTP Methods</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">HTTP methods determine the type of action a client wants
+                    to perform.</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li>GET: Used to request or retrieve information.</li>
+                    <li>POST: Used to submit or send information.</li>
+                    <li>PUT: Used to update information.</li>
+                    <li>PATCH: Used to partially update information.</li>
+                    <li>DELETE: Used to remove information.For our registration system, we will use GET to display the
+                        signup form and POST to submit the registration information.</li>
+                </ul>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">4. Understanding HTML Forms</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">An HTML form is used to collect information from
+                    users.Example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;form action=&quot;/signup&quot; method=&quot;POST&quot;&gt;
 
 
 
@@ -215,24 +234,34 @@ console.log(&quot;Server is running&quot;);});</code></pre>
 
 
 &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;&lt;/form&gt;</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Important Form Attributes</h4>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">action</code>: Specifies where the form information will be sent.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">method</code>: Specifies how the information will be submitted.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">name</code>: Identifies each form field so the server can access its value.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">type</code>: Specifies the type of input expected.Important: The <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">name</code> attribute is very important when submitting forms because Express uses these names to identify the submitted information.</li>
-</ul>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">5. Understanding req.body</h3>
-<p class="text-gray-300 leading-relaxed mb-4">In Express.js, <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">req.body</code> contains information submitted through the request body.To receive information from an HTML form, we need middleware:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">app.use(express.urlencoded({ extended: true }));</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">app.post(&quot;/signup&quot;, (req, res) =&gt; {
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Important Form Attributes</h4>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">action</code>: Specifies where
+                        the form information will be sent.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">method</code>: Specifies how the
+                        information will be submitted.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">name</code>: Identifies each form
+                        field so the server can access its value.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">type</code>: Specifies the type
+                        of input expected.Important: The <code
+                            class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">name</code> attribute is very
+                        important when submitting forms because Express uses these names to identify the submitted
+                        information.</li>
+                </ul>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">5. Understanding req.body</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">In Express.js, <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">req.body</code> contains information
+                    submitted through the request body.To receive information from an HTML form, we need middleware:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">app.use(express.urlencoded({ extended: true }));</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">app.post(&quot;/signup&quot;, (req, res) =&gt; {
 
 
 
@@ -241,204 +270,163 @@ console.log(req.body);
 
 
 res.send(&quot;Registration received&quot;);});</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">If a user submits:</p>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li>Full Name: David Excel</li>
-<li>Email: david@gmail.com</li>
-<li>Password: 123456The server receives an object similar to:</li>
-</ul>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">{
-
-
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">If a user submits:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li>Full Name: David Excel</li>
+                    <li>Email: david@gmail.com</li>
+                    <li>Password: 123456The server receives an object similar to:</li>
+                </ul>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">{
 
 fullname: &quot;David Excel&quot;,
 
-
-
 email: &quot;david@gmail.com&quot;,
-
-
 
 password: &quot;123456&quot;}</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">We can access each value using:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">req.body.fullnamereq.body.emailreq.body.password</code></pre>
-</div>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">6. What is MongoDB?</h3>
-<p class="text-gray-300 leading-relaxed mb-4">MongoDB is a NoSQL database that stores information in a flexible, document-based format.Unlike traditional relational databases that use tables and rows, MongoDB stores information in collections and documents.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">MongoDB Terminologies</h4>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li>Database: A container for storing related information.</li>
-<li>Collection: A group of related documents.</li>
-<li>Document: An individual record stored in MongoDB.</li>
-<li>Field: An individual piece of information inside a document.Example of a student document:</li>
-</ul>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">{
-
-
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">We can access each value using:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">req.body.fullnamereq.body.emailreq.body.password</code></pre>
+                </div>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">6. What is MongoDB?</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">MongoDB is a NoSQL database that stores information in a
+                    flexible, document-based format.Unlike traditional relational databases that use tables and rows,
+                    MongoDB stores information in collections and documents.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">MongoDB Terminologies</h4>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li>Database: A container for storing related information.</li>
+                    <li>Collection: A group of related documents.</li>
+                    <li>Document: An individual record stored in MongoDB.</li>
+                    <li>Field: An individual piece of information inside a document.Example of a student document:</li>
+                </ul>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">{
 
 fullname: &quot;David Excel&quot;,
 
-
-
 email: &quot;david@gmail.com&quot;,
 
-
-
 password: &quot;hashed_password&quot;}</code></pre>
-</div>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">7. What is Mongoose?</h3>
-<p class="text-gray-300 leading-relaxed mb-4">Mongoose is an Object Data Modeling (ODM) library that allows Node.js applications to interact with MongoDB.It provides schemas and models for organizing and managing database information.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">What is a Schema?</h4>
-<p class="text-gray-300 leading-relaxed mb-4">A schema defines the structure of documents in a MongoDB collection.Example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const mongoose = require(&quot;mongoose&quot;);const studentSchema = new mongoose.Schema({
+                </div>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">7. What is Mongoose?</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">Mongoose is an Object Data Modeling (ODM) library that
+                    allows Node.js applications to interact with MongoDB.It provides schemas and models for organizing
+                    and managing database information.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">What is a Schema?</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">A schema defines the structure of documents in a MongoDB
+                    collection.Example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const mongoose = require(&quot;mongoose&quot;);const studentSchema = new mongoose.Schema({
 
 
 
 fullname: String,
 
-
-
 email: String,
 
-
-
 password: String});</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">What is a Model?</h4>
-<p class="text-gray-300 leading-relaxed mb-4">A model is created from a schema and allows us to perform database operations.Example:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const Student = mongoose.model(&quot;Student&quot;, studentSchema);</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">We can now use the Student model to create, retrieve, update, and delete student records.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">8. Practical: Building a Student Registration System</h3>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 1:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create a projectOpen your terminal and run:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">mkdir student-registrationcd student-registrationnpm init -y</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Install the required packages:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">npm install express ejs mongoose dotenv bcryptjsnpm install --save-dev nodemon</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 2:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the project structure</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">student-registration/</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 3:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Configure package.jsonAdd the following scripts:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&quot;scripts&quot;: {
-
-
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">What is a Model?</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">A model is created from a schema and allows us to perform
+                    database operations.Example:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const Student = mongoose.model(&quot;Student&quot;, studentSchema);</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">We can now use the Student model to create, retrieve,
+                    update, and delete student records.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">8. Practical: Building a Student Registration
+                    System</h3>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 1:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create a projectOpen your terminal and run:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">mkdir student-registrationcd student-registrationnpm init -y</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Install the required packages:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">npm install express ejs mongoose dotenv bcryptjsnpm install --save-dev nodemon</code></pre>
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 2:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the project structure</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">student-registration/</code></pre>
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 3:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Configure package.jsonAdd the following scripts:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&quot;scripts&quot;: {
 
 &quot;start&quot;: &quot;node index.js&quot;,
 
-
-
 &quot;dev&quot;: &quot;nodemon index.js&quot;}</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 4:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the student schemaInside <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">models/Student.js</code>:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const mongoose = require(&quot;mongoose&quot;);const studentSchema = new mongoose.Schema({
-
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 4:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the student schemaInside <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">models/Student.js</code>:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const mongoose = require(&quot;mongoose&quot;);const studentSchema = new mongoose.Schema({
 
 fullname: {
 
-
-
-
-
-
 type: String,
-
-
-
-
-
 
 required: true
 
-
 },
-
 
 email: {
 
-
-
-
-
-
 type: String,
-
-
-
-
-
 
 required: true,
 
-
-
-
-
-
 unique: true
-
 
 },
 
-
 password: {
-
-
-
-
-
 
 type: String,
 
-
-
-
-
-
 required: true
 
-
 }});const Student = mongoose.model(&quot;Student&quot;, studentSchema);module.exports = Student;</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Explanation:</h4>
-<ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">mongoose.Schema()</code> creates a schema.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">required: true</code> makes a field compulsory.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">unique: true</code> creates a unique index to prevent duplicate email values.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">mongoose.model()</code> creates a model.</li>
-<li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">module.exports</code> makes the model available in other files.</li>
-</ul>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 5:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the signup pageInside <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">views/signup.ejs</code>:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Explanation:</h4>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 mb-4">
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">mongoose.Schema()</code> creates
+                        a schema.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">required: true</code> makes a
+                        field compulsory.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">unique: true</code> creates a
+                        unique index to prevent duplicate email values.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">mongoose.model()</code> creates a
+                        model.</li>
+                    <li><code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">module.exports</code> makes the
+                        model available in other files.</li>
+                </ul>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 5:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the signup pageInside <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">views/signup.ejs</code>:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;
 
 
 &lt;title&gt;Student Registration&lt;/title&gt;&lt;/head&gt;&lt;body&gt;
@@ -449,84 +437,34 @@ required: true
 
 &lt;form action=&quot;/signup&quot; method=&quot;POST&quot;&gt;
 
-
-
-
-
-
 &lt;label&gt;Full Name:&lt;/label&gt;
-
-
-
-
-
 
 &lt;input type=&quot;text&quot; name=&quot;fullname&quot; required&gt;
 
-
-
-
-
-
 &lt;br&gt;&lt;br&gt;
-
-
-
-
-
 
 &lt;label&gt;Email:&lt;/label&gt;
 
-
-
-
-
-
 &lt;input type=&quot;email&quot; name=&quot;email&quot; required&gt;
 
-
-
-
-
-
 &lt;br&gt;&lt;br&gt;
-
-
-
-
-
 
 &lt;label&gt;Password:&lt;/label&gt;
 
-
-
-
-
-
 &lt;input type=&quot;password&quot; name=&quot;password&quot; required&gt;
-
-
-
-
-
 
 &lt;br&gt;&lt;br&gt;
 
-
-
-
-
-
 &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;
 
-
 &lt;/form&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 6:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the success pageInside <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">views/success.ejs</code>:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 6:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the success pageInside <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">views/success.ejs</code>:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;
 
 
 &lt;title&gt;Registration Successful&lt;/title&gt;&lt;/head&gt;&lt;body&gt;
@@ -548,332 +486,332 @@ required: true
 
 
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
-<p class="text-gray-300 leading-relaxed mb-4">we are using EJS syntax to display information received from our Express server.###</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 7:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Configure MongoDB connectionCreate a MongoDB database using MongoDB Atlas or a local MongoDB installation.Inside the <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">.env</code> file:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">MONGO_URI=mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/studentDB</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Replace the placeholders with your actual MongoDB connection details.Create <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">.gitignore</code>:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">node_modules/.env</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Never upload your database credentials to GitHub.###</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 8:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the Express serverInside <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">index.js</code>:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const express = require(&quot;express&quot;);const mongoose = require(&quot;mongoose&quot;);const bcrypt = require(&quot;bcryptjs&quot;);require(&quot;dotenv&quot;).config();const Student = require(&quot;./models/Student&quot;);const app = express();// Connect to MongoDBmongoose.connect(process.env.MONGO_URI)
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">we are using EJS syntax to display information received
+                    from our Express server.###</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 7:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Configure MongoDB connectionCreate a MongoDB database
+                    using MongoDB Atlas or a local MongoDB installation.Inside the <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">.env</code> file:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">MONGO_URI=mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/studentDB</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Replace the placeholders with your actual MongoDB
+                    connection details.Create <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">.gitignore</code>:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">node_modules/.env</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Never upload your database credentials to GitHub.###</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 8:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the Express serverInside <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">index.js</code>:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">const express = require(&quot;express&quot;);const mongoose = require(&quot;mongoose&quot;);const bcrypt = require(&quot;bcryptjs&quot;);require(&quot;dotenv&quot;).config();const Student = require(&quot;./models/Student&quot;);const app = express();// Connect to MongoDBmongoose.connect(process.env.MONGO_URI)
 
 
 .then(() =&gt; console.log(&quot;MongoDB Connected&quot;))
 
-
 .catch((error) =&gt; console.log(error));// Configure EJSapp.set(&quot;view engine&quot;, &quot;ejs&quot;);// Middlewareapp.use(express.urlencoded({ extended: true }));// Display signup pageapp.get(&quot;/&quot;, (req, res) =&gt; {
-
 
 res.render(&quot;signup&quot;);});// Receive signup informationapp.post(&quot;/signup&quot;, async (req, res) =&gt; {
 
-
 try {
-
-
-
-
-
 
 const { fullname, email, password } = req.body;
 
-
-
-
-
-
 // Hash the password
-
-
-
-
-
 
 const hashedPassword = await bcrypt.hash(password, 10);
 
-
-
-
-
-
 // Create a new student
-
-
-
-
-
 
 const newStudent = new Student({
 
-
-
-
-
-
-
-
-
-
 fullname,
-
-
-
-
-
-
-
-
-
 
 email,
 
-
-
-
-
-
-
-
-
-
 password: hashedPassword
 
-
-
-
-
-
 });
-
-
-
-
-
 
 // Save to MongoDB
 
-
-
-
-
-
 const savedStudent = await newStudent.save();
-
-
-
-
-
 
 // Display success page
 
-
-
-
-
-
 res.render(&quot;success&quot;, {
 
-
-
-
-
-
-
-
-
-
-student: savedStudent
-
-
-
-
-
-
+    student: savedStudent
 });
-
 
 } catch (error) {
 
-
-
-
-
-
 console.log(error);
-
-
-
-
-
 
 if (error.code === 11000) {
 
-
-
-
-
-
-
-
-
-
 return res.status(409).send(&quot;Email already registered&quot;);
-
-
-
-
-
 
 }
 
-
-
-
-
-
 res.status(500).send(&quot;Registration failed&quot;);
-
 
 }});// Start serverapp.listen(3000, () =&gt; {
 
-
 console.log(&quot;Server running on port 3000&quot;);});</code></pre>
-</div>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 9:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Run the projectOpen your terminal and run:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">nodemon</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Open your browser and visit:</p>
-<div class="code-block">
-<button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
-<pre class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">http://localhost:3000</code></pre>
-</div>
-<p class="text-gray-300 leading-relaxed mb-4">Fill in the registration form and click the Register button.If everything works correctly, the student&#x27;s information will be saved in MongoDB, and the success page will be displayed.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">9. Understanding the Complete Process</h3>
-<p class="text-gray-300 leading-relaxed mb-4">The registration process follows these steps:1. A student opens the signup page.2. EJS displays the registration form.3. The student enters their information.4. The browser sends the information to <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">/signup</code> using the POST method.5. Express receives the information through <code class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">req.body</code>.6. Bcrypt hashes the password.7. Mongoose creates a new student document.8. The document is saved in MongoDB.9. Express renders the success page.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Remember:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Passwords should never be stored as plain text. Always hash passwords before saving them. Also, real applications should validate inputs on the server, protect against weak passwords, and avoid displaying sensitive information.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10. INTRODUCTION TO MVCR ARCHITECTURE</h3>
-<p class="text-gray-300 leading-relaxed mb-4">What is MVCR Architecture?MVCR stands for:M – ModelV – ViewC – ControllerR – RoutesMVCR is an application structure that helps developers organize their code into separate files and folders based on their responsibilities.Instead of writing our entire application inside one file, we divide it into different parts to make our code easier to understand, maintain, debug and scale.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Understanding the Four Components</h4>
-<p class="text-gray-300 leading-relaxed mb-4">1.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Model (M)</h4>
-<p class="text-gray-300 leading-relaxed mb-4">The Model is responsible for defining the structure of our data and interacting with the database.It contains our Mongoose schemas and models.Example:models/Student.js2.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">View (V)</h4>
-<p class="text-gray-300 leading-relaxed mb-4">The View is responsible for what users see and interact with.It contains the frontend pages of our application, such as registration forms, login pages and dashboards, it is currently replacing our REACT.Example:views/signup.ejs3.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Controller (C)</h4>
-<p class="text-gray-300 leading-relaxed mb-4">The Controller contains the logic that handles requests from users.It receives information from the request, performs the necessary operations, communicates with the Model and determines the response to send back.Examples of controller responsibilities:Registering a new student.Retrieving student records.Handling login operations.Updating student information.Deleting student records.4.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Routes (R)</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Routes define the different URLs and HTTP methods available in our application.They determine which controller function should handle a particular request.Examples:GET / – Display the signup page.POST /signup – Handle student registration.GET /students – Display all registered students.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10.1 Why Do We Need MVCR Architecture?</h3>
-<p class="text-gray-300 leading-relaxed mb-4">Imagine building an application with 50 different features and writing all the code inside one index.js file.The file would become very large and difficult to manage.MVCR helps us to:Organize our project into separate files.Avoid writing all application logic in one file.Make debugging easier.Reuse code and functions.Make teamwork easier.Maintain and expand applications easily.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10.2 Understanding the MVCR Workflow</h3>
-<p class="text-gray-300 leading-relaxed mb-4">When a user interacts with our application, the following process takes place:The user interacts with the View.The request is sent to the appropriate Route.The Route directs the request to a Controller.The Controller processes the request and communicates with the Model when database operations are needed.The Model interacts with MongoDB.The Controller receives the result and sends an appropriate response, often by rendering a View.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">MVCR Architecture Flow</h4>
-<p class="text-gray-300 leading-relaxed mb-4">USER</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">VIEW</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">ROUTE</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">CONTROLLER</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">MODEL</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">MONGODB</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">CONTROLLER</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">VIEW</p>
-<p class="text-gray-300 leading-relaxed mb-4">|</p>
-<p class="text-gray-300 leading-relaxed mb-4">v</p>
-<p class="text-gray-300 leading-relaxed mb-4">USERNote: Not every request needs to interact with the database. For example, displaying a simple signup page may only require a Route and Controller.</p>
-<h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">11. PRACTICAL: Restructuring the Student Registration System with MVCR</h3>
-<p class="text-gray-300 leading-relaxed mb-4">We will continue using the Student Registration System we built above.Remember that we already have:Our Model: Student.jsOur Views: signup.ejs and success.ejsWe will now create the Controller and Routes folders and move our existing application logic into the appropriate files.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 1:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Restructure the ProjectOur previous project structure looked like this:student-registration/│├── models/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── Student.js│├── views/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">├── signup.ejs│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── success.ejs│├── .env├── index.js└── package.jsonWe will now restructure it to look like this:student-registration/│├── models/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── Student.js│├── views/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">├── signup.ejs│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── success.ejs│├── controllers/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── studentController.js│├── routes/│</p>
-<p class="text-gray-300 leading-relaxed mb-4">└── studentRoutes.js│├── .env├── .gitignore├── index.js└── package.json</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
-<p class="text-gray-300 leading-relaxed mb-4">we have introduced two new folders:controllersroutesOur Model and View folders remain unchanged.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 2:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the ControllerInside the controllers folder, create:studentController.jsThis file will contain the logic for displaying the registration page and registering new students.Move the logic we previously wrote inside our index.js into this file.const Student = require(&quot;../models/Student&quot;);const bcrypt = require(&quot;bcryptjs&quot;);// Display signup pageconst getSignup = (req, res) =&gt; {</p>
-<p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;signup&quot;);};// Register a new studentconst registerStudent = async (req, res) =&gt; {</p>
-<p class="text-gray-300 leading-relaxed mb-4">try {</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Get information from the form</p>
-<p class="text-gray-300 leading-relaxed mb-4">const { fullname, email, password } = req.body;</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Hash the password</p>
-<p class="text-gray-300 leading-relaxed mb-4">const hashedPassword = await bcrypt.hash(password, 10);</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Create a new student</p>
-<p class="text-gray-300 leading-relaxed mb-4">const newStudent = new Student({</p>
-<p class="text-gray-300 leading-relaxed mb-4">fullname,</p>
-<p class="text-gray-300 leading-relaxed mb-4">email,</p>
-<p class="text-gray-300 leading-relaxed mb-4">password: hashedPassword</p>
-<p class="text-gray-300 leading-relaxed mb-4">});</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Save student to MongoDB</p>
-<p class="text-gray-300 leading-relaxed mb-4">const savedStudent = await newStudent.save();</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Display success page</p>
-<p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;success&quot;, {</p>
-<p class="text-gray-300 leading-relaxed mb-4">student: savedStudent</p>
-<p class="text-gray-300 leading-relaxed mb-4">});</p>
-<p class="text-gray-300 leading-relaxed mb-4">} catch (error) {</p>
-<p class="text-gray-300 leading-relaxed mb-4">console.log(error);</p>
-<p class="text-gray-300 leading-relaxed mb-4">if (error.code === 11000) {</p>
-<p class="text-gray-300 leading-relaxed mb-4">return res.status(409).send(&quot;Email already registered&quot;);</p>
-<p class="text-gray-300 leading-relaxed mb-4">}</p>
-<p class="text-gray-300 leading-relaxed mb-4">res.status(500).send(&quot;Registration failed&quot;);</p>
-<p class="text-gray-300 leading-relaxed mb-4">}};// Export controller functionsmodule.exports = {</p>
-<p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
-<p class="text-gray-300 leading-relaxed mb-4">registerStudent};Explanation</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
-<p class="text-gray-300 leading-relaxed mb-4">we are no longer writing our application logic directly inside index.js.We have created two functions:getSignupconst getSignup = (req, res) =&gt; {</p>
-<p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;signup&quot;);};This function displays our signup page.registerStudentconst registerStudent = async (req, res) =&gt; {</p>
-<p class="text-gray-300 leading-relaxed mb-4">// Registration logic};This function receives the submitted information, hashes the password, creates a student document and saves it to MongoDB.Finally:module.exports = {</p>
-<p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
-<p class="text-gray-300 leading-relaxed mb-4">registerStudent};This makes the functions available for use in other files.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 3:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Create the RoutesInside the routes folder, create:studentRoutes.jsThis file will define the URLs and connect them to their corresponding controller functions.const express = require(&quot;express&quot;);const router = express.Router();const {</p>
-<p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
-<p class="text-gray-300 leading-relaxed mb-4">registerStudent} = require(&quot;../controllers/studentController&quot;);// Display signup pagerouter.get(&quot;/&quot;, getSignup);// Handle registrationrouter.post(&quot;/signup&quot;, registerStudent);module.exports = router;Explanation1. Import Expressconst express = require(&quot;express&quot;);2. Create a Routerconst router = express.Router();express.Router() allows us to create separate route handlers outside our main server file.3. Import Controller Functionsconst {</p>
-<p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
-<p class="text-gray-300 leading-relaxed mb-4">registerStudent} = require(&quot;../controllers/studentController&quot;);We are importing the functions we exported from our controller.4. Define Routesrouter.get(&quot;/&quot;, getSignup);router.post(&quot;/signup&quot;, registerStudent);This means:When a user visits /, execute getSignup.When a user submits the signup form to /signup, execute registerStudent.5. Export Routermodule.exports = router;This allows us to use these routes in our main server file.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 4:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Update index.jsNow that we have moved our routes and controller logic into separate files, our index.js will become much cleaner.Replace the previous content of index.js with:const express = require(&quot;express&quot;);const mongoose = require(&quot;mongoose&quot;);require(&quot;dotenv&quot;).config();const studentRoutes = require(&quot;./routes/studentRoutes&quot;);const app = express();// Configure EJSapp.set(&quot;view engine&quot;, &quot;ejs&quot;);// Middlewareapp.use(express.urlencoded({ extended: true }));// Register student routesapp.use(&quot;/&quot;, studentRoutes);// Connect to MongoDBmongoose.connect(process.env.MONGO_URI)</p>
-<p class="text-gray-300 leading-relaxed mb-4">.then(() =&gt; console.log(&quot;MongoDB Connected Successfully&quot;))</p>
-<p class="text-gray-300 leading-relaxed mb-4">.catch((error) =&gt; console.log(error));// Start serverapp.listen(3000, () =&gt; {</p>
-<p class="text-gray-300 leading-relaxed mb-4">console.log(&quot;Server running on http://localhost:3000&quot;);});Understanding app.use()One important line in our server is:app.use(&quot;/&quot;, studentRoutes);This tells Express to use the routes defined in studentRoutes.js.For example:router.get(&quot;/&quot;, getSignup);Because we registered the router at /, the full URL becomes:http://localhost:3000/Similarly:router.post(&quot;/signup&quot;, registerStudent);The full URL becomes:http://localhost:3000/signup</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 5:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Test the ApplicationOur Model and View files remain exactly as they were in the previous lesson.Run the application:npm run devOpen:http://localhost:3000Test the following:Visit the registration page.Enter a student&#x27;s details.Submit the form.Confirm that the information is saved in MongoDB.Confirm that the success page displays the student&#x27;s details.Try registering with the same email address again.If everything works, congratulations! We have successfully restructured our Student Registration System using MVCR Architecture.12. COMPARING OUR OLD STRUCTURE WITH MVCRPrevious StructureMVCR StructureModel in models/Model in models/View in views/View in views/Registration logic in index.jsRegistration logic in controllers/Routes in index.jsRoutes in routes/Everything connected in index.jsindex.js connects the application componentsImportant DifferenceIn our previous application, the routes and their logic were written together inside index.js.Now, the Routes folder handles URL definitions, while the Controller folder handles the actual application logic.This separation makes our application more organized and easier to maintain.13. IMPORTANT QUESTIONS AND ANSWERS1. What does MVCR stand for?Model, View, Controller and Routes.2. What is the responsibility of a Model?A Model defines the structure of our data and provides an interface for interacting with the database.3. What is the responsibility of a View?A View handles the presentation of information to users.4. What is the responsibility of a Controller?A Controller handles application logic and processes incoming requests.5. What is the responsibility of Routes?Routes define application URLs and connect incoming requests to their corresponding controller functions.6. What is the purpose of express.Router()?It allows us to create modular and separate route handlers.7. Why do we use module.exports?It allows us to make functions, objects or other values available to other files.8. What does require() do?It imports a module or exported value from another file.9. Why do we separate Routes from Controllers?To separate URL definitions from application logic, making the application easier to maintain.10. Does every request need to communicate with MongoDB?No. Some requests only display pages or return information without requiring database operations.14. CLASS ASSIGNMENTProject: Upgrade Your Student Registration SystemUsing the Student Registration System we have already built, implement the following features using MVCR Architecture.RequirementsCreate a page that displays all registered students.Create a controller function to retrieve all students from MongoDB.Create a route for displaying all students.Create a student details page that displays an individual student&#x27;s information.Create a controller function for retrieving a student using their MongoDB ID.Create a route for retrieving individual student details.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Additional Challenge</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Implement the following features:Edit student information.Update student information in MongoDB.Delete a student from the database.Important: All new features must follow the MVCR structure. Do not put controller logic directly inside index.js or the routes file.</p>
-<h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Submission:</h4>
-<p class="text-gray-300 leading-relaxed mb-4">Demonstrate the complete working application and explain the responsibility of each folder and file in your project.END OF CLASS NOTE</p>
+                </div>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 9:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Run the projectOpen your terminal and run:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">nodemon</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Open your browser and visit:</p>
+                <div class="code-block">
+                    <button class="copy-button" type="button" onclick="copyCode(this)">Copy</button>
+                    <pre
+                        class="bg-gray-950 border border-gray-700 rounded-xl p-5 pt-10 overflow-x-auto"><code class="text-sm text-gray-200">http://localhost:3000</code></pre>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">Fill in the registration form and click the Register
+                    button.If everything works correctly, the student&#x27;s information will be saved in MongoDB, and
+                    the success page will be displayed.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-8 mb-4">9. Understanding the Complete Process</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">The registration process follows these steps:1. A student
+                    opens the signup page.2. EJS displays the registration form.3. The student enters their
+                    information.4. The browser sends the information to <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">/signup</code> using the POST method.5.
+                    Express receives the information through <code
+                        class="bg-gray-950 px-1.5 py-0.5 rounded text-[#FFD700]">req.body</code>.6. Bcrypt hashes the
+                    password.7. Mongoose creates a new student document.8. The document is saved in MongoDB.9. Express
+                    renders the success page.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Remember:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Passwords should never be stored as plain text. Always
+                    hash passwords before saving them. Also, real applications should validate inputs on the server,
+                    protect against weak passwords, and avoid displaying sensitive information.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10. INTRODUCTION TO MVCR ARCHITECTURE</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">What is MVCR Architecture?MVCR stands for:M – ModelV –
+                    ViewC – ControllerR – RoutesMVCR is an application structure that helps developers organize their
+                    code into separate files and folders based on their responsibilities.Instead of writing our entire
+                    application inside one file, we divide it into different parts to make our code easier to
+                    understand, maintain, debug and scale.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Understanding the Four Components</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">1.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Model (M)</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">The Model is responsible for defining the structure of our
+                    data and interacting with the database.It contains our Mongoose schemas and
+                    models.Example:models/Student.js2.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">View (V)</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">The View is responsible for what users see and interact
+                    with.It contains the frontend pages of our application, such as registration forms, login pages and
+                    dashboards, it is currently replacing our REACT.Example:views/signup.ejs3.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Controller (C)</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">The Controller contains the logic that handles requests
+                    from users.It receives information from the request, performs the necessary operations, communicates
+                    with the Model and determines the response to send back.Examples of controller
+                    responsibilities:Registering a new student.Retrieving student records.Handling login
+                    operations.Updating student information.Deleting student records.4.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Routes (R)</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Routes define the different URLs and HTTP methods
+                    available in our application.They determine which controller function should handle a particular
+                    request.Examples:GET / – Display the signup page.POST /signup – Handle student registration.GET
+                    /students – Display all registered students.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10.1 Why Do We Need MVCR Architecture?</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">Imagine building an application with 50 different features
+                    and writing all the code inside one index.js file.The file would become very large and difficult to
+                    manage.MVCR helps us to:Organize our project into separate files.Avoid writing all application logic
+                    in one file.Make debugging easier.Reuse code and functions.Make teamwork easier.Maintain and expand
+                    applications easily.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">10.2 Understanding the MVCR Workflow</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">When a user interacts with our application, the following
+                    process takes place:The user interacts with the View.The request is sent to the appropriate
+                    Route.The Route directs the request to a Controller.The Controller processes the request and
+                    communicates with the Model when database operations are needed.The Model interacts with MongoDB.The
+                    Controller receives the result and sends an appropriate response, often by rendering a View.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">MVCR Architecture Flow</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">USER</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">VIEW</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">ROUTE</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">CONTROLLER</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">MODEL</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">MONGODB</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">CONTROLLER</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">VIEW</p>
+                <p class="text-gray-300 leading-relaxed mb-4">|</p>
+                <p class="text-gray-300 leading-relaxed mb-4">v</p>
+                <p class="text-gray-300 leading-relaxed mb-4">USERNote: Not every request needs to interact with the
+                    database. For example, displaying a simple signup page may only require a Route and Controller.</p>
+                <h3 class="text-2xl font-bold text-[#FFD700] mt-10 mb-4">11. PRACTICAL: Restructuring the Student
+                    Registration System with MVCR</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">We will continue using the Student Registration System we
+                    built above.Remember that we already have:Our Model: Student.jsOur Views: signup.ejs and
+                    success.ejsWe will now create the Controller and Routes folders and move our existing application
+                    logic into the appropriate files.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 1:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Restructure the ProjectOur previous project structure
+                    looked like this:student-registration/│├── models/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── Student.js│├── views/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">├── signup.ejs│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── success.ejs│├── .env├── index.js└── package.jsonWe
+                    will now restructure it to look like this:student-registration/│├── models/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── Student.js│├── views/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">├── signup.ejs│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── success.ejs│├── controllers/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── studentController.js│├── routes/│</p>
+                <p class="text-gray-300 leading-relaxed mb-4">└── studentRoutes.js│├── .env├── .gitignore├── index.js└──
+                    package.json</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">we have introduced two new folders:controllersroutesOur
+                    Model and View folders remain unchanged.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 2:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the ControllerInside the controllers folder,
+                    create:studentController.jsThis file will contain the logic for displaying the registration page and
+                    registering new students.Move the logic we previously wrote inside our index.js into this file.const
+                    Student = require(&quot;../models/Student&quot;);const bcrypt = require(&quot;bcryptjs&quot;);//
+                    Display signup pageconst getSignup = (req, res) =&gt; {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;signup&quot;);};// Register a new
+                    studentconst registerStudent = async (req, res) =&gt; {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">try {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Get information from the form</p>
+                <p class="text-gray-300 leading-relaxed mb-4">const { fullname, email, password } = req.body;</p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Hash the password</p>
+                <p class="text-gray-300 leading-relaxed mb-4">const hashedPassword = await bcrypt.hash(password, 10);
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Create a new student</p>
+                <p class="text-gray-300 leading-relaxed mb-4">const newStudent = new Student({</p>
+                <p class="text-gray-300 leading-relaxed mb-4">fullname,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">email,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">password: hashedPassword</p>
+                <p class="text-gray-300 leading-relaxed mb-4">});</p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Save student to MongoDB</p>
+                <p class="text-gray-300 leading-relaxed mb-4">const savedStudent = await newStudent.save();</p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Display success page</p>
+                <p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;success&quot;, {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">student: savedStudent</p>
+                <p class="text-gray-300 leading-relaxed mb-4">});</p>
+                <p class="text-gray-300 leading-relaxed mb-4">} catch (error) {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">console.log(error);</p>
+                <p class="text-gray-300 leading-relaxed mb-4">if (error.code === 11000) {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">return res.status(409).send(&quot;Email already
+                    registered&quot;);</p>
+                <p class="text-gray-300 leading-relaxed mb-4">}</p>
+                <p class="text-gray-300 leading-relaxed mb-4">res.status(500).send(&quot;Registration failed&quot;);</p>
+                <p class="text-gray-300 leading-relaxed mb-4">}};// Export controller functionsmodule.exports = {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">registerStudent};Explanation</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Notice that</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">we are no longer writing our application logic directly
+                    inside index.js.We have created two functions:getSignupconst getSignup = (req, res) =&gt; {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">res.render(&quot;signup&quot;);};This function displays
+                    our signup page.registerStudentconst registerStudent = async (req, res) =&gt; {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">// Registration logic};This function receives the
+                    submitted information, hashes the password, creates a student document and saves it to
+                    MongoDB.Finally:module.exports = {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">registerStudent};This makes the functions available for
+                    use in other files.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 3:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Create the RoutesInside the routes folder,
+                    create:studentRoutes.jsThis file will define the URLs and connect them to their corresponding
+                    controller functions.const express = require(&quot;express&quot;);const router =
+                    express.Router();const {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">registerStudent} =
+                    require(&quot;../controllers/studentController&quot;);// Display signup
+                    pagerouter.get(&quot;/&quot;, getSignup);// Handle registrationrouter.post(&quot;/signup&quot;,
+                    registerStudent);module.exports = router;Explanation1. Import Expressconst express =
+                    require(&quot;express&quot;);2. Create a Routerconst router = express.Router();express.Router()
+                    allows us to create separate route handlers outside our main server file.3. Import Controller
+                    Functionsconst {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">getSignup,</p>
+                <p class="text-gray-300 leading-relaxed mb-4">registerStudent} =
+                    require(&quot;../controllers/studentController&quot;);We are importing the functions we exported
+                    from our controller.4. Define Routesrouter.get(&quot;/&quot;,
+                    getSignup);router.post(&quot;/signup&quot;, registerStudent);This means:When a user visits /,
+                    execute getSignup.When a user submits the signup form to /signup, execute registerStudent.5. Export
+                    Routermodule.exports = router;This allows us to use these routes in our main server file.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 4:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Update index.jsNow that we have moved our routes and
+                    controller logic into separate files, our index.js will become much cleaner.Replace the previous
+                    content of index.js with:const express = require(&quot;express&quot;);const mongoose =
+                    require(&quot;mongoose&quot;);require(&quot;dotenv&quot;).config();const studentRoutes =
+                    require(&quot;./routes/studentRoutes&quot;);const app = express();// Configure EJSapp.set(&quot;view
+                    engine&quot;, &quot;ejs&quot;);// Middlewareapp.use(express.urlencoded({ extended: true }));//
+                    Register student routesapp.use(&quot;/&quot;, studentRoutes);// Connect to
+                    MongoDBmongoose.connect(process.env.MONGO_URI)</p>
+                <p class="text-gray-300 leading-relaxed mb-4">.then(() =&gt; console.log(&quot;MongoDB Connected
+                    Successfully&quot;))</p>
+                <p class="text-gray-300 leading-relaxed mb-4">.catch((error) =&gt; console.log(error));// Start
+                    serverapp.listen(3000, () =&gt; {</p>
+                <p class="text-gray-300 leading-relaxed mb-4">console.log(&quot;Server running on
+                    http://localhost:3000&quot;);});Understanding app.use()One important line in our server
+                    is:app.use(&quot;/&quot;, studentRoutes);This tells Express to use the routes defined in
+                    studentRoutes.js.For example:router.get(&quot;/&quot;, getSignup);Because we registered the router
+                    at /, the full URL becomes:http://localhost:3000/Similarly:router.post(&quot;/signup&quot;,
+                    registerStudent);The full URL becomes:http://localhost:3000/signup</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Step 5:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Test the ApplicationOur Model and View files remain
+                    exactly as they were in the previous lesson.Run the application:npm run
+                    devOpen:http://localhost:3000Test the following:Visit the registration page.Enter a student&#x27;s
+                    details.Submit the form.Confirm that the information is saved in MongoDB.Confirm that the success
+                    page displays the student&#x27;s details.Try registering with the same email address again.If
+                    everything works, congratulations! We have successfully restructured our Student Registration System
+                    using MVCR Architecture.12. COMPARING OUR OLD STRUCTURE WITH MVCRPrevious StructureMVCR
+                    StructureModel in models/Model in models/View in views/View in views/Registration logic in
+                    index.jsRegistration logic in controllers/Routes in index.jsRoutes in routes/Everything connected in
+                    index.jsindex.js connects the application componentsImportant DifferenceIn our previous application,
+                    the routes and their logic were written together inside index.js.Now, the Routes folder handles URL
+                    definitions, while the Controller folder handles the actual application logic.This separation makes
+                    our application more organized and easier to maintain.13. IMPORTANT QUESTIONS AND ANSWERS1. What
+                    does MVCR stand for?Model, View, Controller and Routes.2. What is the responsibility of a Model?A
+                    Model defines the structure of our data and provides an interface for interacting with the
+                    database.3. What is the responsibility of a View?A View handles the presentation of information to
+                    users.4. What is the responsibility of a Controller?A Controller handles application logic and
+                    processes incoming requests.5. What is the responsibility of Routes?Routes define application URLs
+                    and connect incoming requests to their corresponding controller functions.6. What is the purpose of
+                    express.Router()?It allows us to create modular and separate route handlers.7. Why do we use
+                    module.exports?It allows us to make functions, objects or other values available to other files.8.
+                    What does require() do?It imports a module or exported value from another file.9. Why do we separate
+                    Routes from Controllers?To separate URL definitions from application logic, making the application
+                    easier to maintain.10. Does every request need to communicate with MongoDB?No. Some requests only
+                    display pages or return information without requiring database operations.14. CLASS
+                    ASSIGNMENTProject: Upgrade Your Student Registration SystemUsing the Student Registration System we
+                    have already built, implement the following features using MVCR Architecture.RequirementsCreate a
+                    page that displays all registered students.Create a controller function to retrieve all students
+                    from MongoDB.Create a route for displaying all students.Create a student details page that displays
+                    an individual student&#x27;s information.Create a controller function for retrieving a student using
+                    their MongoDB ID.Create a route for retrieving individual student details.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Additional Challenge</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Implement the following features:Edit student
+                    information.Update student information in MongoDB.Delete a student from the database.Important: All
+                    new features must follow the MVCR structure. Do not put controller logic directly inside index.js or
+                    the routes file.</p>
+                <h4 class="text-lg font-semibold text-[#E0249B] mt-6 mb-2">Submission:</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">Demonstrate the complete working application and explain
+                    the responsibility of each folder and file in your project.END OF CLASS NOTE</p>
             </div>
         </main>
     </div>
